@@ -1,0 +1,45 @@
+
+<!doctype html>
+{% load static %}
+<html>
+	<head>
+		<title> Transparent Login form </title>
+		<link rel="stylesheet" href="{% static 'car/css/login.css' %}" >
+		<link rel="stylesheet" href="{% static 'car/css/Bootstrap.css' %}" >
+	<style>
+		#veer4221{
+			background-color: teal;
+			padding:4%;
+		}
+		body{
+			background-color: gainsboro;
+		}
+	</style>
+
+	</head>
+	<body>
+		<div class=”container” id="veer4221">
+			<div class=”row”>
+			  <div class=”col-xs-6 col-md-4”></div>
+			</div>
+		  </div>
+
+	<div class="wh">	
+		<div class="loginBox">
+			
+			<img src="{% static 'car/image/user.png' %} " class="user">
+			<h2>Log In Here</h2>
+			<form>
+				<p>Email</p>
+				<input type="text" name = "" placeholder="Enter Email">
+				<p>Password</p>
+				<input type="password" name = "" placeholder="Enter Password">
+				<input type="submit" name = "" value="sign In">
+				<a href="#"> Forget Password</a> 
+				
+			</form>
+		</div>
+	</div>
+	<script src="{% static 'car/js/bootstrap.js' %}"></script>
+	</body>
+</html>

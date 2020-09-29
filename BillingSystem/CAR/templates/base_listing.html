@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Resume - Start Bootstrap Theme</title>
+        <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="{% static 'car/css/styles.css' %}" rel="stylesheet" />
+        <link href="{% static 'car/css/Bootstrap.css' %}" rel="stylesheet" />
+            
+        <style>
+        #sideNav{
+        background-color: darkslategray; 
+        }
+        #bootstrapdatatable{
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+           
+        }
+        #main{
+             padding:none;
+             margin-top: 10%;
+             margin-bottom: 10%;
+        }
+        /* body {overflow-x: hidden;}
+        html, body {
+             max-width: 100%;
+            overflow-x: hidden;
+        } */
+        .col-12{
+        padding-right: 0!important;
+        padding-left: 0!important;
+        }
+        body{
+        background-color:gainsboro;
+        }
+.row{
+    margin-right: 0px;
+    margin-left: 0px; 
+}
+        
+
+        </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark  fixed-top" id="sideNav">
+        <h3 style="color:cornsilk">Dream Car Point</h3>
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">
+            <span class="d-block d-lg-none">Yogesh Patel</span>
+            <span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="{% static 'car/image/profile.jpg' %}" /></span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav">
+             <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/dashbord">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/listing">listing</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/report">report</a></li>
+            </ul>
+        </div>
+    </nav>
+<div class="container">
+ <div class="row">
+        
+ 
+
+            <div class="col-md-12" id="main">
+                <!-- <h4>Django CRUD (Create Read Update Delete) Example - Bootstrap Datatable</h4>  -->
+                <h1 class="mb-0">
+                    customer
+                    <span style="color:#bd5d38;">List</span>
+                </h1>
+                <span><a href="/listing/Costomer" class="btn btn-primary">Add New Record</a></span>  
+                <br>
+                <br>
+                <div class="table-responsive">
+        <table id="bootstrapdatatable" class="table table-striped table-bordered" width="100%">
+                    <thead>
+                        <th><input type="checkbox" id="checkall" /></th>
+                        <th>ID</th>
+                        <th>SarName</th>
+                        <th>Name</th>
+                        <th>Fathername</th>
+                        <th>Contact</th>
+                        <th>City</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </thead>
+        <tbody>
+        {% for customer in customer_list %}  
+            <tr>  
+            <td><input type="checkbox" class="checkthis" /></td>
+            <td>{{ customer.CUS_ID }}</td>  
+            <td>{{ customer.CUS_SARNAME }}</td>  
+            <td>{{ customer.CUS_NAME }}</td>
+            <td>{{ customer.CUS_FNAME }}</td>  
+            <td>{{ customer.CUS_MO }}</td> 
+            <td>{{ customer.CUS_CITY }}</td>  
+             <td>
+                 
+                     <a href="{% url 'Update' customer.CUS_ID %}" class="btn btn-primary btn-xs" >
+                        <i class='fas fa-edit'></i>
+                    </a>
+                
+            </td>
+            <td>
+                
+                    <form action="{% url 'Delete' customer.CUS_ID %}" method="POST",class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </form>
+                    
+                
+            </td> 
+             </tr>  
+        {% endfor %} 
+        </tbody>
+                
+        </table>
+                </div>
+            </div>
+
+
+
+
+
+
+</div>
+</div>
+
+<script src="{% static 'car/js/jquery.js' %}"></script>
+<!-- <script src="{% static 'car/js/pooper.js' %}"></script> -->
+<script src="{% static 'car/js/scripts.js' %}"></script>
+<script src="{% static 'car/js/bootstrap.js' %}"></script>
+<script src="{% static 'car/js/datatables.js' %}"></script>
+<script src="{% static 'car/js/dataTables.bootstrap4.js' %}"></script>
+
+
+
+<script>
+$(document).ready(function() {
+    $('#bootstrapdatatable').DataTable({     
+      "aLengthMenu": [[3, 5, 10, 25, -1], [3, 5, 10, 25, "All"]],
+        "iDisplayLength": 3
+       } 
+    );
+    
+} );
+</script>  
+</body> 
+</html>
