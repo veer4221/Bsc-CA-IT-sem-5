@@ -18,6 +18,7 @@
                     {% csrf_token %}
     
                     {% for Fi in form %}
+                        {{Fi.CUS_ID_id}}
                         {{Fi.label_tag}}
                         {{Fi}}
     

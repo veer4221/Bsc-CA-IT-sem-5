@@ -29,7 +29,7 @@ urlpatterns = [
     # path('listing/Car/',views.car,name="car"),
     path('login/',views.login,name="login"),
     path('listing/Costomer/',views.formToDB.as_view(),name="Costomer"),
-    path('listing/Car/',views.car,name="Car"),
+    path('listing/Car/',views.formCar,name="Car"),
     path('listing/RTO/',views.RTO,name="RTO"),
     path('listing/other/',views.other,name="other"),
     path('listing/Insurance/',views.insurance,name="Insurance"),
@@ -37,6 +37,10 @@ urlpatterns = [
     path('<int:id>/',views.UpdateData,name="Update"),        
     
 ]
+
+
+
+# CAR_car.CUS_ID_id
 
 
 

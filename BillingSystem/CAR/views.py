@@ -63,9 +63,34 @@ class formToDB(TemplateView):
         fm = customerDe(request.POST)
         if fm.is_valid():
             fm.save()
+            print(fm)
             return HttpResponseRedirect('/listing')   
 
+# class formCartoDB(TemplateView):
+#     template_name = 'index_car.html'
+#     def get_context_data(self, *arg, **kwargs):
+#         fm = formCartoDB()
+#         context = {'form2':fm}
+#         return context
+    
+#     def post(self,request,id=0):
+#         fm = carDe(request.POST)
+#         if fm.is_valid():
+#             fm.save()
+#             print(fm)
+#             return HttpResponseRedirect('/listing')   
 
+def formCar(request):
+    if request.method == 'POST':
+        fm = carDe(request.POST)
+        if fm.is_valid():
+            fm.save()
+            fm = customerDe()
+
+    else:
+        fm = carDe()
+    #data = customer.object.all()
+    return render(request,'index_car.html',{'form':fm})
 
 def DeleteDate(request,id):
     if request.method == 'POST' :
@@ -75,33 +100,29 @@ def DeleteDate(request,id):
 
 
 def UpdateData(request,id):
+    print(id)
     if request.method =='POST':
+        print("post")
         cus = customer.objects.get(pk=id)
-        fm = customerDe(request.POST,instance=cus)
+        fm = customerDe(request.POST,instance=cus) 
         if fm.is_valid():
             fm.save()
-        if car.objects.filter(pk=id).exists():    
-            cr = car.objects.get(pk=id)
-            cfm = carDe(request.POST,instance=cr)
-            if cfm.is_valid():
-                cfm.save()
-
+            return HttpResponseRedirect('/listing/')
+    
     else:
+        print("else")
         cus = customer.objects.get(pk=id)
         fm = customerDe(instance=cus)
-        if not car.objects.filter(pk=id).exists():
-        #     print("not")
-        #     CarDeADD(request,id)
-        #     # cr = car.objects.get(pk=id)
-        #     # cfm = carDe(instance=cr)
-            return render(request,'index_customerUpdate.html',{'form':fm})
-        else:
-            cr = car.objects.get(pk=id)
-            cfm = carDe(instance=cr)
-    if car.objects.filter(pk=id).exists():
-        return render(request,'index_customerUpdate.html',{'form':fm,'form2':cfm})
-    else:
-        return render(request,'index_customerUpdate.html',{'form':fm})
+        car1 = car.objects.filter(CUS_ID=id).first()   
+        fm2 = carDe(instance=car1,initial={'CUS_ID':id})
+        return render(request,'index_customerUpdate.html',{'form':fm,'form2':fm2})
+    #     else:
+    #         cr = car.objects.get(pk=id)
+    #         cfm = carDe(instance=cr)
+    # if car.objects.filter(pk=id).exists():
+    #     return render(request,'index_customerUpdate.html',{'form':fm,'form2':cfm})
+    # else:
+    #     return render(request,'index_customerUpdate.html',{'form':fm})
 
 
         
@@ -118,26 +139,3 @@ def UpdateData(request,id):
     
 #     return render(request,'index_car.html',{'form':fm})
 
-def CarDeADD(request,id):
-    print("this is varde")
-    print(request)
-    print(id)
-    if request.method == 'POST':
-        fm = carDe(request.POST)
-        if fm.is_valid():
-            cid    = fm.cleaned_data['id']
-            cm     = fm.cleaned_data['CAR_MODEL']
-            cc     = fm.cleaned_data['CAR_COLOUR']
-            crco   = fm.cleaned_data['CAR_COMPANY']
-            cpo    = fm.cleaned_data['CAR_PRICE_OR']
-            cpe    = fm.cleaned_data['CAR_PRICE_EX']
-            cbamt  = fm.cleaned_data['CAR_BOOKING_AMT']
-            cbdate = fm.cleaned_data['CAR_BOOKING_DATE']
-            reg = car(CUS_ID = cid,CAR_MODEL=cm,CAR_COLOUR=cc,CAR_COMPANY=crco,CAR_PRICE_OR=cpo,CAR_PRICE_EX=cpe,CAR_BOOKING_AMT=cbamt,CAR_BOOKING_DATE=cbdate)
-            reg.save()
-            return HttpResponseRedirect('/listing/')
-
-    else:
-        fm = customerDe()
-    #data = customer.object.all()
-    #return render(request,'index_customerUpdate.html',{'form':fm})
