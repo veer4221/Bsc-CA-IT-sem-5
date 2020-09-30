@@ -107,7 +107,17 @@ def UpdateData(request,id):
         fm = customerDe(request.POST,instance=cus) 
         if fm.is_valid():
             fm.save()
-            return HttpResponseRedirect('/listing/')
+        
+        if car.objects.filter(CUS_ID=id).exists():
+            car1 = car.objects.get(CUS_ID=id)
+            cfm = carDe(request.POST,instance=car1) 
+            if cfm.is_valid():
+                cfm.save()
+        else:
+            cfm = carDe(request.POST)
+            if cfm.is_valid():
+                cfm.save()
+        return HttpResponseRedirect('/listing/')
     
     else:
         print("else")
