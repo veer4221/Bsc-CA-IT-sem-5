@@ -16,7 +16,7 @@
             <!-- Experience-->
             <section class="resume-section" id="experience">
                 <div class="resume-section-content">
-                <h1>cus</h1>
+                <h1>cus Details</h1>
                 <form method="POST" action="">
                     {% csrf_token %}
 
@@ -31,6 +31,26 @@
                     <input type="submit" class="btn btn-success">
                     <button class="btn btn-info"><a href="{% url 'listing' %}"><i class="fa fa-home"></i> <label id="ho">Home</label></a></button>
                 </form>
+
+                <br>
+                <br>
+                <h1>car Details</h1>
+                <form method="POST" action="">
+                    {% csrf_token %}
+
+                    {% for Fi in form2 %}
+                        {{Fi.label_tag}}
+                        {{Fi}}
+
+                    {% endfor %}
+                    
+                    
+                    
+                    <input type="submit" class="btn btn-success">
+                    <button class="btn btn-info"><a href="{% url 'listing' %}"><i class="fa fa-home"></i> <label id="ho">Home</label></a></button>
+                </form>
+               
+               
                  </div>
             </section>
             <hr class="m-0" />

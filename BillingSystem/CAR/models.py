@@ -15,8 +15,8 @@ class customer(models.Model):
     CUS_Zip    = models.CharField(max_length= 6)
     date_modified = models.DateTimeField(auto_now=True)
 
-    # def __str__(self):
-    #     return self.CUS_NAME
+    def __str__(self):
+        return self.CUS_NAME
 
 class car(models.Model):
     CUS_ID     = models.ForeignKey(customer,on_delete=models.CASCADE)
@@ -28,11 +28,22 @@ class car(models.Model):
     CAR_PRICE_EX = models.IntegerField()   
     CAR_BOOKING_AMT = models.IntegerField()
     CAR_BOOKING_DATE = models.DateField()
+      
+    
+    def __str__(self):
+        return self.CAR_MODEL
+
+class insurance(models.Model):
+    CUS_ID     = models.ForeignKey(customer,on_delete=models.CASCADE)
     INS_COMPANY_NAME = models.CharField(max_length= 20)
     INS_TYPE         = models.CharField(max_length= 20)
     INS_TOTAL_AMT    = models.IntegerField()
     INS_TO_DATE      = models.DateField()
     INS_FROM_DATE   = models.DateField()
+
+
+class RTO(models.Model):
+    CUS_ID     = models.ForeignKey(customer,on_delete=models.CASCADE)
     RTO_REG_CHARGE  = models.IntegerField()
     RTO_NUM_PLT_CHARGE = models.IntegerField()
     RTO_NUM_PLT_NO   = models.CharField(max_length= 20,unique=True)
@@ -40,12 +51,12 @@ class car(models.Model):
     RTO_CHESSISE_NO  = models.CharField(max_length= 20,unique=True)
     RTO_KEY_NO       = models.CharField(max_length= 20,unique=True)
     RTO_BATTERY_NO     = models.CharField(max_length= 20,unique=True)
+   
+class OTHER(models.Model):
+    CUS_ID     = models.ForeignKey(customer,on_delete=models.CASCADE)
     OTH_TRANS_CHARGE   = models.IntegerField()
     OTH_DELIVERY_DATE   = models.DateField()
     OTH_EXPENSE_NAME    = models.CharField(max_length= 20)
     OTH_EXPENSE_PRICE   = models.IntegerField()
     date_modified = models.DateTimeField(auto_now=True)
-    
-    def __str__(self):
-        return self.CAR_MODEL
-    
+   

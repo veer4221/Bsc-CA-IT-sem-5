@@ -11,11 +11,24 @@
             <!-- Experience-->
             <section class="resume-section" id="experience">
                 <div class="resume-section-content">
-                <h1>car Dat</h1>
-                 </div>
+                <h1>car Dat</h1> 
+                <!-- <h1>veer</h1> -->
+                <hr class="m-0" />
+                <form method="POST" action="">
+                    {% csrf_token %}
+    
+                    {% for Fi in form %}
+                        {{Fi.label_tag}}
+                        {{Fi}}
+    
+                    {% endfor %}
+                    
+                    
+                    
+                <input type="submit" class="btn btn-success">
+                </form>
+            </div>
             </section>
-            <hr class="m-0" />
-
         </div>
         <!-- Bootstrap core JS-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

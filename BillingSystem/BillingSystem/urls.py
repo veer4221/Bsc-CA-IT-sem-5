@@ -26,6 +26,7 @@ urlpatterns = [
     path('report/',views.report,name="report"),
     path('listing/',views.customerView.as_view(),name="listing"),
     path('dashbord/',views.dashbord,name="dashbord"),
+    # path('listing/Car/',views.car,name="car"),
     path('login/',views.login,name="login"),
     path('listing/Costomer/',views.formToDB.as_view(),name="Costomer"),
     path('listing/Car/',views.car,name="Car"),
