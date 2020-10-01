@@ -1,8 +1,15 @@
-from django.shortcuts import render,HttpResponseRedirect
+from django.shortcuts import render,HttpResponseRedirect,HttpResponse
 from django.views.generic.list import ListView
 from django.views.generic.base import TemplateView
 from .models import customer,car,insurance,RTO,OTHER
 from .forms import customerDe,carDe,insuranceDe,RTODE,OTHERDE
+from easy_pdf.views import PDFTemplateView,PDFTemplateResponseMixin
+from django.contrib.auth.models import User
+import datetime
+from django.template.loader import render_to_string
+from weasyprint import HTML
+import tempfile
+from django.db.models import Sum 
 
  
 # Create your views here.
@@ -208,3 +215,23 @@ def UpdateData(request,id):
 # def temp(request):
 #     st = insurance.objects.all()
 #     return render(request,'index_rto.html',{'st':st})
+
+
+def export_pdf(request):
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'inline; attachment; filename=Expances' + \
+        str(datetime.datetime.now())+'.pdf'
+    
+    html_string = render_to_string('pdf_des.html',{'expance':[],'total':0})
+    html = HTML(string=html_string)
+
+    result = html.write_pdf() 
+
+    with tempfile.NamedTemporaryFile(delete=True) as output:
+        output.write(result)
+        output.flush()
+
+        output=open(output.name,'rb')
+        response.write(output.read())
+
+    return response   
