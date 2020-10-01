@@ -35,7 +35,8 @@ urlpatterns = [
    # path('listing/Insurance/',views.insurance,name="Insurance"),
     path('Delete/<int:id>/',views.DeleteDate,name="Delete"),     
     path('<int:id>/',views.UpdateData,name="Update"),        
-    path('export-pdf/',views.export_pdf,name="pdf")
+   # path('export-pdf/<id>/',views.export_pdf,name="pdf")
+    path('export-pdf/<int:id>/',views.render_pdf_view,name="pdf")
 ]
 
 

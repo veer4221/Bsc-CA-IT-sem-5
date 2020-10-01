@@ -16,7 +16,7 @@
             <!-- Experience-->
             <section class="resume-section" id="experience">
                 <div class="resume-section-content">
-                <h1>cus Details</h1>
+                <h1>cus {{id}} Details</h1>
                 <form method="POST" action="">
                     {% csrf_token %}
 
@@ -103,6 +103,7 @@
                       <input type="submit" class="btn btn-success">
                      <button class="btn btn-info"><a href="{% url 'listing' %}"><i class="fa fa-home"></i> <label id="ho">Home</label></a></button>
                  </form>
+                 <button class="btn btn-info"><a href="{% url 'pdf' id %}"><i class="fa fa-file" style="font-size:36px"></i><label id="ho"> Pdf</label></a></button>
                
 
 

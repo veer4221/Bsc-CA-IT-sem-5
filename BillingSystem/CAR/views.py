@@ -10,7 +10,12 @@ from django.template.loader import render_to_string
 from weasyprint import HTML
 import tempfile
 from django.db.models import Sum 
-
+from django.contrib.staticfiles import finders
+import os
+from django.template.loader import get_template
+from xhtml2pdf import pisa
+# from django.http import HttpResponse
+from django.conf import settings
  
 # Create your views here.
 #def home(request):
@@ -186,9 +191,9 @@ def UpdateData(request,id):
         print('ins',ot)   
         fm5 = OTHERDE(instance=ot,initial={'CUS_ID':id})
         if car.objects.filter(CUS_ID=id).exists():
-            return render(request,'index_customerUpdate.html',{'form':fm,'form2':fm2,'form3':fm3,'form4':fm4,'form5':fm5})
+            return render(request,'index_customerUpdate.html',{'form':fm,'form2':fm2,'form3':fm3,'form4':fm4,'form5':fm5,'id':id})
         else:
-            return render(request,'index_customerUpdate.html',{'form':fm,'form2':fm2})
+            return render(request,'index_customerUpdate.html',{'form':fm,'form2':fm2,'id':id})
     #     else:
     #         cr = car.objects.get(pk=id)
     #         cfm = carDe(instance=cr)
@@ -217,21 +222,46 @@ def UpdateData(request,id):
 #     return render(request,'index_rto.html',{'st':st})
 
 
-def export_pdf(request):
-    response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'inline; attachment; filename=Expances' + \
-        str(datetime.datetime.now())+'.pdf'
+# def export_pdf(request,id):
+#     response = HttpResponse(content_type='application/pdf')
+#     response['Content-Disposition'] = 'inline; attachment; filename=Expances' + \
+#         str(datetime.datetime.now())+'.pdf'
+#     response['Content-Transfer-Encoding'] ='binary'
+#     c = car.objects.get(CUS_ID=id)
     
-    html_string = render_to_string('pdf_des.html',{'expance':[],'total':0})
-    html = HTML(string=html_string)
+#     html_string = render_to_string('pdf_des.html',{'expance':c,})
+#     html = HTML(string=html_string)
 
-    result = html.write_pdf() 
+#     result = html.write_pdf() 
 
-    with tempfile.NamedTemporaryFile(delete=True) as output:
-        output.write(result)
-        output.flush()
+#     with tempfile.NamedTemporaryFile(delete=True) as output:
+#         output.write(result)
+#         output.flush()
 
-        output=open(output.name,'rb')
-        response.write(output.read())
+#         output=open(output.name,'rb')
+#         response.write(output.read())
 
-    return response   
+#     return response   
+
+def render_pdf_view(request, *args, **kwargs):
+    id = kwargs.get('id')
+    cus = customer.objects.get(CUS_ID=id) 
+    c = car.objects.get(CUS_ID=id) 
+    
+    print(cus)
+    template_path = 'pdf_des.html'
+    context = {'customer': cus,'car':c}
+    # Create a Django response object, and specify content_type as pdf
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'filename="report.pdf"'
+    # find the template and render it.
+    template = get_template(template_path)
+    html = template.render(context)
+
+    # create a pdf
+    pisa_status = pisa.CreatePDF(
+       html, dest=response)
+    # if error then show some funy view
+    if pisa_status.err:
+       return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response

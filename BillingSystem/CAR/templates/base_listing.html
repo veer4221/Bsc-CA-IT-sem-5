@@ -25,6 +25,9 @@
             font-family: Verdana, Geneva, Tahoma, sans-serif;
            
         }
+        .deletebtn{
+            text-align: center;
+        }
         #main{
              padding:none;
              margin-top: 10%;
@@ -93,6 +96,7 @@
                         <th>City</th>
                         <th>Edit</th>
                         <th>Delete</th>
+                        <th>Bill</th>
                     </thead>
         <tbody>
         {% for customer in customer_list %}  
@@ -111,17 +115,24 @@
                     </a>
                 
             </td>
-            <td>
+            <td class="deletebtn">
                 
                     <form action="{% url 'Delete' customer.CUS_ID %}" method="POST",class="d-inline">
                         {% csrf_token %}
-                        <button type="submit" class="btn btn-danger">
+                        <button type="submit"  class="btn btn-danger">
                             <i class="fa fa-trash"></i>
                         </button>
                     </form>
                     
                 
-            </td> 
+            </td>
+            <td>
+                 
+                <a href="{% url 'pdf' customer.CUS_ID %}" class="btn btn-success btn-xs" >
+                   <i class='fas fa-file'></i>
+               </a>
+           
+             </td> 
              </tr>  
         {% endfor %} 
         </tbody>
