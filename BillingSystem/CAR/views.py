@@ -1,22 +1,22 @@
 from django.shortcuts import render,HttpResponseRedirect
 from django.views.generic.list import ListView
 from django.views.generic.base import TemplateView
-from .models import customer,car
-from .forms import customerDe,carDe
+from .models import customer,car,insurance,RTO
+from .forms import customerDe,carDe,insuranceDe
 
  
 # Create your views here.
-def home(request):
-    return render(request,'index.html')
+#def home(request):
+ #   return render(request,'index.html')
 
-def base(request):
-    return render(request,'base.html')
+#def base(request):
+ #   return render(request,'base.html')
 
-def report(request):
-    return render(request,'base_report.html')
+# def report(request):
+#     return render(request,'base_report.html')
 
-def listing(request):
-   return render(request,'base_listing.html')
+# def listing(request):
+#    return render(request,'base_listing.html')
 
 def dashbord(request):
     return render(request,'base_dashbord.html')
@@ -39,14 +39,14 @@ def login(request):
 #     #data = customer.object.all()
 #     return render(request,'index_customer.html',{'form':fm})
 a = 2
-def RTO(request):
-    return render(request,'index_rto.html')
+#def RTO(request):
+ #   return render(request,'index_rto.html')
 
-def insurance(request):
-    return render(request,'index_insurance.html')
+# def insurance(request):
+    # return render(request,'index_insurance.html')
 
-def other(request):
-    return render(request,'index_other.html')
+# def other(request):
+    # return render(request,'index_other.html')
 
 class customerView(ListView):
     model = customer
@@ -80,17 +80,17 @@ class formToDB(TemplateView):
 #             print(fm)
 #             return HttpResponseRedirect('/listing')   
 
-def formCar(request):
-    if request.method == 'POST':
-        fm = carDe(request.POST)
-        if fm.is_valid():
-            fm.save()
-            fm = customerDe()
+# def formCar(request):
+#     if request.method == 'POST':
+#         fm = carDe(request.POST)
+#         if fm.is_valid():
+#             fm.save()
+#             fm = customerDe()
 
-    else:
-        fm = carDe()
-    #data = customer.object.all()
-    return render(request,'index_car.html',{'form':fm})
+#     else:
+#         fm = carDe()
+#     #data = customer.object.all()
+#     return render(request,'index_car.html',{'form':fm})
 
 def DeleteDate(request,id):
     if request.method == 'POST' :
@@ -102,30 +102,50 @@ def DeleteDate(request,id):
 def UpdateData(request,id):
     print(id)
     if request.method =='POST':
-        print("post")
+        print(request)
+       ############### Custmer Update ############## 
         cus = customer.objects.get(pk=id)
         fm = customerDe(request.POST,instance=cus) 
         if fm.is_valid():
             fm.save()
-        
+       ############### car Update ############## 
         if car.objects.filter(CUS_ID=id).exists():
             car1 = car.objects.get(CUS_ID=id)
-            cfm = carDe(request.POST,instance=car1) 
-            if cfm.is_valid():
-                cfm.save()
+            fm2 = carDe(request.POST,instance=car1) 
+            if fm2.is_valid():
+                fm2.save()
         else:
             cfm = carDe(request.POST)
             if cfm.is_valid():
                 cfm.save()
+        ############### INS Update ##############  
+        if insurance.objects.filter(CUS_ID=id).exists():
+            ins = insurance.objects.get(CUS_ID=id)
+            fm3 = insuranceDe(request.POST,instance=ins) 
+            if fm3.is_valid():
+                fm3.save()
+                print(fm3)
+        else:
+            cfm3 = insuranceDe(request.POST)
+            if cfm3.is_valid():
+                cfm3.save()
         return HttpResponseRedirect('/listing/')
     
     else:
+        ########### customerForm ###############
         print("else")
         cus = customer.objects.get(pk=id)
         fm = customerDe(instance=cus)
-        car1 = car.objects.filter(CUS_ID=id).first()   
+        #############car form #################
+        car1 = car.objects.filter(CUS_ID=id).first()
+        print('car1',car1)   
         fm2 = carDe(instance=car1,initial={'CUS_ID':id})
-        return render(request,'index_customerUpdate.html',{'form':fm,'form2':fm2})
+        ############## ins form ######################
+        ins = insurance.objects.filter(CUS_ID=id).first()
+        print('ins',ins)   
+        fm3 = insuranceDe(instance=ins,initial={'CUS_ID':id})
+
+        return render(request,'index_customerUpdate.html',{'form':fm,'form2':fm2,'form3':fm3})
     #     else:
     #         cr = car.objects.get(pk=id)
     #         cfm = carDe(instance=cr)
@@ -149,3 +169,6 @@ def UpdateData(request,id):
     
 #     return render(request,'index_car.html',{'form':fm})
 
+# def temp(request):
+#     st = insurance.objects.all()
+#     return render(request,'index_rto.html',{'st':st})

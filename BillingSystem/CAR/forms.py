@@ -1,6 +1,6 @@
 from django.core import validators
 from django import forms
-from .models import car,customer
+from .models import car,customer,insurance
 #from bootstrap_modal_forms.forms import BSModalModelForm
 
 
@@ -37,4 +37,17 @@ class carDe(forms.ModelForm):
             'CAR_BOOKING_AMT': forms.NumberInput(attrs={'class':'form-control'}),
             'CAR_BOOKING_DATE': forms.DateInput(attrs={'class':'form-control'}),
             
+        }
+
+class insuranceDe(forms.ModelForm):
+    class Meta:
+        model = insurance
+        fields =['CUS_ID','INS_COMPANY_NAME','INS_TYPE','INS_TOTAL_AMT','INS_TO_DATE','INS_FROM_DATE']
+        widgets={
+            'CUS_ID':forms.NumberInput(attrs={'class':'form-control'}),
+        'INS_COMPANY_NAME': forms.TextInput(attrs={'class':'form-control'}),
+        'INS_TYPE': forms.TextInput(attrs={'class':'form-control'}),
+        'INS_TOTAL_AMT':forms.NumberInput(attrs={'class':'form-control'}),
+        'INS_TO_DATE': forms.DateInput(attrs={'class':'form-control'}),
+        'INS_FROM_DATE': forms.DateInput(attrs={'class':'form-control'}),
         }

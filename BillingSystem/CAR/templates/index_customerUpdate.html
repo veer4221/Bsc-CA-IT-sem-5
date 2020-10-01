@@ -50,7 +50,33 @@
                     <button class="btn btn-info"><a href="{% url 'listing' %}"><i class="fa fa-home"></i> <label id="ho">Home</label></a></button>
                 </form>
                
+
+
+
+
+                <h1>INS Details</h1>
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    
+                    {% for Fig in form3 %}
+                        {{Fig.label_tag}}
+                        {{Fig}}
+
+                    {% endfor %}
+                    
+                    
+                    
+                    <input type="submit" class="btn btn-success">
+                    <button class="btn btn-info"><a href="{% url 'listing' %}"><i class="fa fa-home"></i> <label id="ho">Home</label></a></button>
+                </form>
                
+                
+
+
+
+
+
+
                  </div>
             </section>
             <hr class="m-0" />
