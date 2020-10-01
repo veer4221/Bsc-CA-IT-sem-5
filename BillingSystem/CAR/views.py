@@ -1,8 +1,8 @@
 from django.shortcuts import render,HttpResponseRedirect
 from django.views.generic.list import ListView
 from django.views.generic.base import TemplateView
-from .models import customer,car,insurance,RTO
-from .forms import customerDe,carDe,insuranceDe
+from .models import customer,car,insurance,RTO,OTHER
+from .forms import customerDe,carDe,insuranceDe,RTODE,OTHERDE
 
  
 # Create your views here.
@@ -129,7 +129,33 @@ def UpdateData(request,id):
             cfm3 = insuranceDe(request.POST)
             if cfm3.is_valid():
                 cfm3.save()
-        return HttpResponseRedirect('/listing/')
+        ############## RTO #######################
+        if RTO.objects.filter(CUS_ID=id).exists():
+            rt = RTO.objects.get(CUS_ID=id)
+            fm4 = RTODE(request.POST,instance=rt) 
+            if fm4.is_valid():
+                fm4.save()
+                print(fm4)
+        else:
+            fm4 = RTODE(request.POST)
+            if fm4.is_valid():
+                fm4.save()
+
+       
+        ############ OTHER  #####################
+        if OTHER.objects.filter(CUS_ID=id).exists():
+            ot = OTHER.objects.get(CUS_ID=id)
+            fm5 = OTHERDE(request.POST,instance=ot) 
+            if fm5.is_valid():
+                fm5.save()
+                print(fm5)
+        else:
+            cfm3 = OTHERDE(request.POST)
+            if cfm3.is_valid():
+                cfm3.save()
+        
+        
+        return HttpResponseRedirect('/listing')
     
     else:
         ########### customerForm ###############
@@ -144,8 +170,18 @@ def UpdateData(request,id):
         ins = insurance.objects.filter(CUS_ID=id).first()
         print('ins',ins)   
         fm3 = insuranceDe(instance=ins,initial={'CUS_ID':id})
-
-        return render(request,'index_customerUpdate.html',{'form':fm,'form2':fm2,'form3':fm3})
+        ############### RTO #####################
+        rt = RTO.objects.filter(CUS_ID=id).first()
+        print('ins',rt)   
+        fm4 = RTODE(instance=rt,initial={'CUS_ID':id})
+        ############### OTHER #####################
+        ot = OTHER.objects.filter(CUS_ID=id).first()
+        print('ins',ot)   
+        fm5 = OTHERDE(instance=ot,initial={'CUS_ID':id})
+        if car.objects.filter(CUS_ID=id).exists():
+            return render(request,'index_customerUpdate.html',{'form':fm,'form2':fm2,'form3':fm3,'form4':fm4,'form5':fm5})
+        else:
+            return render(request,'index_customerUpdate.html',{'form':fm,'form2':fm2})
     #     else:
     #         cr = car.objects.get(pk=id)
     #         cfm = carDe(instance=cr)

@@ -69,9 +69,41 @@
                     <input type="submit" class="btn btn-success">
                     <button class="btn btn-info"><a href="{% url 'listing' %}"><i class="fa fa-home"></i> <label id="ho">Home</label></a></button>
                 </form>
-               
-                
+               <br>
+               <br>
+                <h1>RTO Details</h1>
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    
+                    {% for Fig in form4 %}
+                        {{Fig.label_tag}}
+                        {{Fig}}
 
+                    {% endfor %}
+                    
+                    
+                    
+                    <input type="submit" class="btn btn-success">
+                    <button class="btn btn-info"><a href="{% url 'listing' %}"><i class="fa fa-home"></i> <label id="ho">Home</label></a></button>
+                </form>
+                
+                <br>
+                <br>
+                 <h1>OTHER </h1>
+                 <form method="POST" action="">
+                     {% csrf_token %}
+                     
+                     {% for F in form5 %}
+                         {{F.label_tag}}
+                         {{F}}
+ 
+                     {% endfor %}
+                     
+                     
+                      <input type="submit" class="btn btn-success">
+                     <button class="btn btn-info"><a href="{% url 'listing' %}"><i class="fa fa-home"></i> <label id="ho">Home</label></a></button>
+                 </form>
+               
 
 
 

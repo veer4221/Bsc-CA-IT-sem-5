@@ -1,6 +1,6 @@
 from django.core import validators
 from django import forms
-from .models import car,customer,insurance
+from .models import car,customer,insurance,RTO,OTHER
 #from bootstrap_modal_forms.forms import BSModalModelForm
 
 
@@ -44,10 +44,40 @@ class insuranceDe(forms.ModelForm):
         model = insurance
         fields =['CUS_ID','INS_COMPANY_NAME','INS_TYPE','INS_TOTAL_AMT','INS_TO_DATE','INS_FROM_DATE']
         widgets={
-            'CUS_ID':forms.NumberInput(attrs={'class':'form-control'}),
+        'CUS_ID':forms.NumberInput(attrs={'class':'form-control'}),
         'INS_COMPANY_NAME': forms.TextInput(attrs={'class':'form-control'}),
         'INS_TYPE': forms.TextInput(attrs={'class':'form-control'}),
         'INS_TOTAL_AMT':forms.NumberInput(attrs={'class':'form-control'}),
         'INS_TO_DATE': forms.DateInput(attrs={'class':'form-control'}),
         'INS_FROM_DATE': forms.DateInput(attrs={'class':'form-control'}),
+        }
+
+class RTODE(forms.ModelForm):
+    class Meta:
+        model = RTO
+        fields =['CUS_ID','RTO_ID','RTO_REG_CHARGE','RTO_NUM_PLT_CHARGE','RTO_NUM_PLT_NO','RTO_ENG_NO','RTO_CHESSISE_NO','RTO_KEY_NO','RTO_BATTERY_NO']
+        widgets={
+        'CUS_ID':forms.NumberInput(attrs={'class':'form-control'}),
+        'RTO_ID':forms.NumberInput(attrs={'class':'form-control'}),
+        'RTO_REG_CHARGE':forms.NumberInput(attrs={'class':'form-control'}),
+        'RTO_NUM_PLT_CHARGE':forms.NumberInput(attrs={'class':'form-control'}),
+        'RTO_NUM_PLT_NO':forms.NumberInput(attrs={'class':'form-control'}),
+        'RTO_ENG_NO':forms.NumberInput(attrs={'class':'form-control'}),
+        'RTO_CHESSISE_NO':forms.NumberInput(attrs={'class':'form-control'}),
+        'RTO_KEY_NO':forms.NumberInput(attrs={'class':'form-control'}),
+        'RTO_BATTERY_NO':forms.NumberInput(attrs={'class':'form-control'}),
+
+        }
+
+class OTHERDE(forms.ModelForm):
+    class Meta:
+        model = OTHER
+        fields =['CUS_ID','OTH_ID','OTH_TRANS_CHARGE', 'OTH_DELIVERY_DATE', 'OTH_EXPENSE_NAME', 'OTH_EXPENSE_PRICE']
+        widgets={
+        'CUS_ID' :forms.NumberInput(attrs={'class':'form-control'}),
+        'OTH_ID' :forms.NumberInput(attrs={'class':'form-control'}),
+        'OTH_TRANS_CHARGE' :forms.NumberInput(attrs={'class':'form-control'}),
+        'OTH_DELIVERY_DATE': forms.DateInput(attrs={'class':'form-control'}),
+        'OTH_EXPENSE_NAME' : forms.TextInput(attrs={'class':'form-control'}),
+        'OTH_EXPENSE_PRICE' :forms.NumberInput(attrs={'class':'form-control'}),
         }
