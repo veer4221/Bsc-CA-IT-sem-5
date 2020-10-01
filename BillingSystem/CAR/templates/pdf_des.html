@@ -1,56 +1,74 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
     <head>
-        <title>Title</title>
-        <style type="text/css">
-            body {
-                font-weight: 200;
-                font-size: 14px;
-            }
-            .header {
-                font-size: 20px;
-                font-weight: 100;
-                text-align: center;
-                color: #007cae;
-            }
-            .title {
-                font-size: 22px;
-                font-weight: 100;
-               /* text-align: right;*/
-               padding: 10px 20px 0px 20px;  
-            }
-            .title span {
-                color: #007cae;
-            }
-            .details {
-                padding: 10px 20px 0px 20px;
-                text-align: left !important;
-                /*margin-left: 40%;*/
-            }
-            .hrItem {
-                border: none;
-                height: 1px;
-                /* Set the hr color */
-                color: #333; /* old IE */
-                background-color: #fff; /* Modern Browsers */
-            }
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Resume - Start Bootstrap Theme</title>
+        <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="{% static 'car/css/styles.css' %}" rel="stylesheet" />
+        <link href="{% static 'car/css/Bootstrap.css' %}" rel="stylesheet" />
+        <style>
+        body{
+			
+			background: url("{% static 'static/static/image/bg.jpeg' %}");
+            background-repeat:no-repeat;
+            background-size:100%;
+		}
+        table{
+            font-size: larger;
+        }
         </style>
     </head>
-    <body>
-        <div class='wrapper'>
-            <div class='header'>
-                <p class='title'>Invoice # </p>
-            </div>
-        <div>
-        <div class='details'>
+<body>
+    <div class=”container” id="veer4221">
+        <div class=”row”>
         
-        <h1>{{customer.CUS_ID}}</h1>
-        <h1>{{customer.CUS_SARNAME}}</h1>
-        <h1>{{customer.CUS_NAME}}</h1>
-        <h1>{{customer.CUS_FNAME}}</h1>
-        <h1>{{car.CAR_MODEL}}</h1>
-            <hr class='hrItem' />
+            <img src="{{im.IMG.path}}" width="100%">
         </div>
-    </div>
-    </body>
-</html>
+        <div class="row">
+
+            <
+        <table>
+            <tr>
+                <td><h2>Customer name  :</h2> </td>
+                <td>{{customer.CUS_SARNAME}}{{customer.CUS_NAME}}}{{customer.CUS_FNAME}}</td>
+                <td><h2>CAR MODEL      :</h2></td>
+                <td>{{car.CAR_MODEL}}</td>
+            </tr>
+            <tr>
+                <td><h2>Customer city  : </h2></td>
+                <td>{{customer.CUS_CITY}}</td>
+                <td><h2>CAR colour     :</h2></td>
+                <td>{{car.CAR_COLOUR}}</td>
+            </tr>
+            <tr>
+                <td><h2>Customer Mo   :</h2> </td>
+                <td>{{customer.CUS_MO}}</td>
+                <td><h2>CAR Company   :</h2></td>
+                <td>{{car.CAR_COMPANY}}</td>
+            </tr>
+            <tr>
+                <td><h2>Customer Email:</h2> </td>
+                <td>{{customer.CUS_EMAIL}}</td>
+                <td><h2>CAR price     :</h2></td>
+                <td>{{car.CAR_PRICE_OR}}</td>
+                <tr>
+                    <td><h2>Customer state: </h2></td>
+                    <td>{{customer.CUS_STATE}}</td>
+                    <td><h2>CAR bookinamt:</h2></td>
+                    <td>{{car.CAR_BOOKING_AMT}}</td>
+                </tr>
+            </tr>
+        </table>
+     
+      
+</body>

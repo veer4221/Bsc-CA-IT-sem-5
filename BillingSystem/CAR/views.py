@@ -1,7 +1,7 @@
 from django.shortcuts import render,HttpResponseRedirect,HttpResponse
 from django.views.generic.list import ListView
 from django.views.generic.base import TemplateView
-from .models import customer,car,insurance,RTO,OTHER
+from .models import customer,car,insurance,RTO,OTHER,IMG
 from .forms import customerDe,carDe,insuranceDe,RTODE,OTHERDE
 from easy_pdf.views import PDFTemplateView,PDFTemplateResponseMixin
 from django.contrib.auth.models import User
@@ -247,10 +247,13 @@ def render_pdf_view(request, *args, **kwargs):
     id = kwargs.get('id')
     cus = customer.objects.get(CUS_ID=id) 
     c = car.objects.get(CUS_ID=id) 
+    im = IMG.objects.get(id=1)
+    print(im)
+    print("hello")
     
     print(cus)
     template_path = 'pdf_des.html'
-    context = {'customer': cus,'car':c}
+    context = {'customer': cus,'car':c,'im':im}
     # Create a Django response object, and specify content_type as pdf
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'filename="report.pdf"'

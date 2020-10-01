@@ -66,4 +66,10 @@ class OTHER(models.Model):
     OTH_EXPENSE_NAME    = models.CharField(max_length= 20)
     OTH_EXPENSE_PRICE   = models.IntegerField(null=True)
     date_modified = models.DateTimeField(auto_now=True)
+
+
+class IMG(models.Model):
+    IMG = models.ImageField()
+
+
    

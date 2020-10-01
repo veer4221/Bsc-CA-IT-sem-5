@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import customer,car,insurance,RTO,OTHER
+from .models import customer,car,insurance,RTO,OTHER,IMG
 
 # Register your models here.
 @admin.register(customer)
@@ -28,3 +28,7 @@ class RTOA(admin.ModelAdmin):
 @admin.register(OTHER)
 class OTHER(admin.ModelAdmin):
     list_display=['OTH_ID','OTH_TRANS_CHARGE', 'OTH_DELIVERY_DATE', 'OTH_EXPENSE_NAME', 'OTH_EXPENSE_PRICE','date_modified','CUS_ID']
+
+@admin.register(IMG)
+class IMG(admin.ModelAdmin):
+    list_display=['IMG']
