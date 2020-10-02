@@ -115,12 +115,12 @@ def UpdateData(request,id):
     print(id)
     if request.method =='POST':
         print(request)
-       ############### Custmer Update ############## 
+############### Custmer Update ############## 
         cus = customer.objects.get(pk=id)
         fm = customerDe(request.POST,instance=cus) 
         if fm.is_valid():
             fm.save()
-       ############### car Update ############## 
+############## car Update ############## 
         if car.objects.filter(CUS_ID=id).exists():
             car1 = car.objects.get(CUS_ID=id)
             fm2 = carDe(request.POST,instance=car1) 
@@ -130,7 +130,7 @@ def UpdateData(request,id):
             cfm = carDe(request.POST)
             if cfm.is_valid():
                 cfm.save()
-        ############### INS Update ##############  
+############### INS Update ##############  
         if insurance.objects.filter(CUS_ID=id).exists():
             ins = insurance.objects.get(CUS_ID=id)
             fm3 = insuranceDe(request.POST,instance=ins) 
@@ -141,7 +141,7 @@ def UpdateData(request,id):
             cfm3 = insuranceDe(request.POST)
             if cfm3.is_valid():
                 cfm3.save()
-        ############## RTO #######################
+############## RTO #######################
         if RTO.objects.filter(CUS_ID=id).exists():
             rt = RTO.objects.get(CUS_ID=id)
             fm4 = RTODE(request.POST,instance=rt) 
@@ -154,7 +154,7 @@ def UpdateData(request,id):
                 fm4.save()
 
        
-        ############ OTHER  #####################
+############ OTHER  #####################
         if OTHER.objects.filter(CUS_ID=id).exists():
             ot = OTHER.objects.get(CUS_ID=id)
             fm5 = OTHERDE(request.POST,instance=ot) 
@@ -167,26 +167,26 @@ def UpdateData(request,id):
                 cfm3.save()
         
         
-        return HttpResponseRedirect('/listing')
-    
+        return HttpResponseRedirect('/%s/'%id)
+    #/classroom/notamember/%s/' % classname)
     else:
-        ########### customerForm ###############
+########### customerForm ###############
         print("else")
         cus = customer.objects.get(pk=id)
         fm = customerDe(instance=cus)
-        #############car form #################
+#############car form #################
         car1 = car.objects.filter(CUS_ID=id).first()
         print('car1',car1)   
         fm2 = carDe(instance=car1,initial={'CUS_ID':id})
-        ############## ins form ######################
+############## ins form ######################
         ins = insurance.objects.filter(CUS_ID=id).first()
         print('ins',ins)   
         fm3 = insuranceDe(instance=ins,initial={'CUS_ID':id})
-        ############### RTO #####################
+############### RTO #####################
         rt = RTO.objects.filter(CUS_ID=id).first()
         print('ins',rt)   
         fm4 = RTODE(instance=rt,initial={'CUS_ID':id})
-        ############### OTHER #####################
+############## OTHER #####################
         ot = OTHER.objects.filter(CUS_ID=id).first()
         print('ins',ot)   
         fm5 = OTHERDE(instance=ot,initial={'CUS_ID':id})
@@ -268,3 +268,8 @@ def render_pdf_view(request, *args, **kwargs):
     if pisa_status.err:
        return HttpResponse('We had some errors <pre>' + html + '</pre>')
     return response
+
+
+def AddCarModel(request):
+    
+    return render(request,'add_carmodal.html')

@@ -6,120 +6,138 @@
     #ho{
         color:white;
     }
+    idv{
+        margin: 40%;
+        padding: 20%;
+    }
     </style>
-    <body id="page-top">
-        <!-- Navigation-->
+    
+      
+
+
+
+
+
+
+<body>
+<div class="container-fluid">
+    <div class="row">    
+        <div class="col-4">
             {% include 'index_nav.html' %}
-        <!-- Page Content-->
-        <div class="container-fluid p-0">
-
-            <!-- Experience-->
-            <section class="resume-section" id="experience">
-                <div class="resume-section-content">
-                <h1>cus {{id}} Details</h1>
-                <form method="POST" action="">
-                    {% csrf_token %}
-
-                    {% for Fi in form %}
-                        {{Fi.label_tag}}
-                        {{Fi}}
-
-                    {% endfor %}
-                    
-                    
-                    
-                    <input type="submit" class="btn btn-success">
-                    <button class="btn btn-info"><a href="{% url 'listing' %}"><i class="fa fa-home"></i> <label id="ho">Home</label></a></button>
-                </form>
-
-                <br>
-                <br>
-                <h1>car Details</h1>
-                <form method="POST" action="">
-                    {% csrf_token %}
-                    
-                    {% for Fi in form2 %}
-                        {{Fi.label_tag}}
-                        {{Fi}}
-
-                    {% endfor %}
-                    
-                    
-                    
-                    <input type="submit" class="btn btn-success">
-                    <button class="btn btn-info"><a href="{% url 'listing' %}"><i class="fa fa-home"></i> <label id="ho">Home</label></a></button>
-                </form>
-               
-
-
-
-
-                <h1>INS Details</h1>
-                <form method="POST" action="">
-                    {% csrf_token %}
-                    
-                    {% for Fig in form3 %}
-                        {{Fig.label_tag}}
-                        {{Fig}}
-
-                    {% endfor %}
-                    
-                    
-                    
-                    <input type="submit" class="btn btn-success">
-                    <button class="btn btn-info"><a href="{% url 'listing' %}"><i class="fa fa-home"></i> <label id="ho">Home</label></a></button>
-                </form>
-               <br>
-               <br>
-                <h1>RTO Details</h1>
-                <form method="POST" action="">
-                    {% csrf_token %}
-                    
-                    {% for Fig in form4 %}
-                        {{Fig.label_tag}}
-                        {{Fig}}
-
-                    {% endfor %}
-                    
-                    
-                    
-                    <input type="submit" class="btn btn-success">
-                    <button class="btn btn-info"><a href="{% url 'listing' %}"><i class="fa fa-home"></i> <label id="ho">Home</label></a></button>
-                </form>
-                
-                <br>
-                <br>
-                 <h1>OTHER </h1>
-                 <form method="POST" action="">
-                     {% csrf_token %}
-                     
-                     {% for F in form5 %}
-                         {{F.label_tag}}
-                         {{F}}
- 
-                     {% endfor %}
-                     
-                     
-                      <input type="submit" class="btn btn-success">
-                     <button class="btn btn-info"><a href="{% url 'listing' %}"><i class="fa fa-home"></i> <label id="ho">Home</label></a></button>
-                 </form>
-                 <button class="btn btn-info"><a href="{% url 'pdf' id %}"><i class="fa fa-file" style="font-size:36px"></i><label id="ho"> Pdf</label></a></button>
-               
-
-
-
-
-
-                 </div>
-            </section>
-            <hr class="m-0" />
 
         </div>
+        <div class="col-10">
+            <div class="row ">
+            
+                <div class="col-md-6">
+                                <h1>cus {{id}} Details</h1>
+                                <form method="POST" action="">
+                                    {% csrf_token %}
+                
+                                    {% for Fi in form %}
+                                        {{Fi.label_tag}}
+                                        {{Fi}}
+                
+                                    {% endfor %}
+                                    
+                                    
+                                    
+                                    <br><br><br><br><input type="submit" class="btn btn-success">
+                                    <button class="btn btn-info"><a href="{% url 'listing' %}"><i class="fa fa-home"></i> <label id="ho">Home</label></a></button>
+                                </form>
+                </div>
+                <div class="col-md-6">
+                                <h1>car Details</h1>
+                                <form method="POST" action="">
+                                    {% csrf_token %}
+                                    
+                                    {% for Fi in form2 %}
+                                        {{Fi.label_tag}}
+                                        {{Fi}}
+                
+                                    {% endfor %}
+                                    
+                                    
+                                    
+                                    <br><br><br><br><input type="submit" class="btn btn-success">
+                                    <button class="btn btn-info"><a href="{% url 'listing' %}"><i class="fa fa-home"></i> <label id="ho">Home</label></a></button>
+                                </form>
+                
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-md-6">
+                                <h1>INS Details</h1>
+                                <form method="POST" action="">
+                                    {% csrf_token %}
+                                    
+                                    {% for Fig in form3 %}
+                                        {{Fig.label_tag}}
+                                        {{Fig}}
+                
+                                    {% endfor %}
+                                    
+
+                                    
+                                    <br><br><input type="submit" class="btn btn-success">
+                                    <button class="btn btn-info"><a href="{% url 'listing' %}"><i class="fa fa-home"></i> <label id="ho">Home</label></a></button>
+                                </form>   
+                </div>
+                <div class="col-md-6">
+                                <h1>RTO Details</h1>
+                                <form method="POST" action="">
+                                    {% csrf_token %}
+                                    
+                                    {% for Fig in form4 %}
+                                        {{Fig.label_tag}}
+                                        {{Fig}}
+                
+                                    {% endfor %}
+                                    
+                                    
+                                    
+                                    <br><br><input type="submit" class="btn btn-success">
+                                    <button class="btn btn-info"><a href="{% url 'listing' %}"><i class="fa fa-home"></i> <label id="ho">Home</label></a></button>
+                                </form>
+                        
+                </div>
+            <hr>
+            </div>
+            <div class="row ">
+                <div class="col-md-6">
+                                <br><br><br><br>
+                                <h1>OTHER </h1>
+                                <form method="POST" action="">
+                                    {% csrf_token %}
+                                    
+                                    {% for F in form5 %}
+                                        {{F.label_tag}}
+                                        {{F}}
+                
+                                    {% endfor %}
+                                    
+                                    
+                                    <br><br><input type="submit" class="btn btn-success">
+                                    <button class="btn btn-info"><a href="{% url 'listing' %}"><i class="fa fa-home"></i> <label id="ho">Home</label></a></button>
+                                </form>
+        
+                
+                    
+                </div>
+                <div class="col-md-6 align-items-center">
+                    <button class="btn btn-info"><a href="{% url 'pdf' id %}"><i class="fa fa-file" style="font-size:36px"></i><label id="ho"> Pdf</label></a></button>                        
+                
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
         <!-- Bootstrap core JS-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.query.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
         <!-- Third party plugin JS-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+        <script src="https://cdnjs.clo.1/jquery.easing.min.js"></script>
         <!-- Core theme JS-->
         <script src="{% static 'car/js/scripts.js' %}"></script>
     </body>

@@ -2,6 +2,10 @@ from django.contrib import admin
 from .models import customer,car,insurance,RTO,OTHER,IMG
 
 # Register your models here.
+# @admin.register(AadCar)
+# class AadCar(admin.ModelAdmin):
+#     list_display=['CAR_MODEL']
+
 @admin.register(customer)
 class customerAdmin(admin.ModelAdmin):
     list_display =[ 'CUS_ID','CUS_SARNAME','CUS_NAME','CUS_FNAME','CUS_CITY','CUS_MO','CUS_EMAIL','CUS_STATE','CUS_Zip','date_modified']
@@ -32,3 +36,4 @@ class OTHER(admin.ModelAdmin):
 @admin.register(IMG)
 class IMG(admin.ModelAdmin):
     list_display=['IMG']
+

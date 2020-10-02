@@ -3,7 +3,8 @@ from django import forms
 from .models import car,customer,insurance,RTO,OTHER
 #from bootstrap_modal_forms.forms import BSModalModelForm
 
-
+class DateInput(forms.DateInput):
+    input_type='date'
 
 class customerDe(forms.ModelForm):
     class Meta:
@@ -61,11 +62,11 @@ class RTODE(forms.ModelForm):
         'RTO_ID':forms.NumberInput(attrs={'class':'form-control'}),
         'RTO_REG_CHARGE':forms.NumberInput(attrs={'class':'form-control'}),
         'RTO_NUM_PLT_CHARGE':forms.NumberInput(attrs={'class':'form-control'}),
-        'RTO_NUM_PLT_NO':forms.NumberInput(attrs={'class':'form-control'}),
-        'RTO_ENG_NO':forms.NumberInput(attrs={'class':'form-control'}),
-        'RTO_CHESSISE_NO':forms.NumberInput(attrs={'class':'form-control'}),
-        'RTO_KEY_NO':forms.NumberInput(attrs={'class':'form-control'}),
-        'RTO_BATTERY_NO':forms.NumberInput(attrs={'class':'form-control'}),
+        'RTO_NUM_PLT_NO':forms.TextInput(attrs={'class':'form-control'}),
+        'RTO_ENG_NO':forms.TextInput(attrs={'class':'form-control'}),
+        'RTO_CHESSISE_NO':forms.TextInput(attrs={'class':'form-control'}),
+        'RTO_KEY_NO':forms.TextInput(attrs={'class':'form-control'}),
+        'RTO_BATTERY_NO':forms.TextInput(attrs={'class':'form-control'}),
 
         }
 
@@ -81,3 +82,12 @@ class OTHERDE(forms.ModelForm):
         'OTH_EXPENSE_NAME' : forms.TextInput(attrs={'class':'form-control'}),
         'OTH_EXPENSE_PRICE' :forms.NumberInput(attrs={'class':'form-control'}),
         }
+
+
+# class ADDCAR(forms.ModelForm):
+#     class Meta:
+#         model = AadCar
+#         fields =['CAR_MODEL']
+#         widgets={
+#             'OTH_EXPENSE_NAME' : forms.TextInput(attrs={'class':'form-control'})
+#             }
