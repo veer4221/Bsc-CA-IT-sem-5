@@ -251,12 +251,22 @@ def render_pdf_view(request, *args, **kwargs):
     RT = RTO.objects.get(CUS_ID=id) 
     OT = OTHER.objects.get(CUS_ID=id) 
     im = IMG.objects.get(id=1)
+    cp = car.objects.only('CAR_PRICE_EX').get(CUS_ID=id).CAR_PRICE_EX
+    RTOC = RTO.objects.only('RTO_REG_CHARGE').get(CUS_ID=id).RTO_REG_CHARGE
+    tpc =OTHER.objects.only('OTH_TRANS_CHARGE').get(CUS_ID=id).OTH_TRANS_CHARGE
+    npc= RTO.objects.only('RTO_NUM_PLT_CHARGE').get(CUS_ID=id).RTO_NUM_PLT_CHARGE
+    oex =OTHER.objects.only('OTH_EXPENSE_PRICE').get(CUS_ID=id).OTH_EXPENSE_PRICE
+    insA=insurance.objects.only('INS_TOTAL_AMT').get(CUS_ID=id).INS_TOTAL_AMT
+    add = cp+RTOC+tpc+npc+oex+insA
+    print(add)
+    print(RTOC)
+    
     print(im)
     print("hello")
     bill_date = date.today()
     print(cus)
     template_path = 'pdf_des.html'
-    context = {'customer': cus,'car':c,'im':im,'bill_date':bill_date,'ins':IN,'RTO':RT,'other':OT}
+    context = {'customer': cus,'car':c,'im':im,'bill_date':bill_date,'ins':IN,'RTO':RT,'other':OT,'totel':add}
     # Create a Django response object, and specify content_type as pdf
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'filename="report.pdf"'

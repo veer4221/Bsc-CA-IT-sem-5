@@ -60,7 +60,7 @@ class insuranceDe(forms.ModelForm):
 class RTODE(forms.ModelForm):
     class Meta:
         model = RTO
-        fields =['CUS_ID','RTO_ID','RTO_REG_CHARGE','RTO_NUM_PLT_CHARGE','RTO_NUM_PLT_NO','RTO_ENG_NO','RTO_CHESSISE_NO','RTO_KEY_NO','RTO_BATTERY_NO']
+        fields =['CUS_ID','RTO_ID','RTO_REG_CHARGE','RTO_NUM_PLT_CHARGE','RTO_NUM_PLT_NO','RTO_ENG_NO','RTO_CHESSISE_NO']
         widgets={
         'CUS_ID':forms.NumberInput(attrs={'class':'form-control'}),
         'RTO_ID':forms.NumberInput(attrs={'class':'form-control'}),
@@ -69,8 +69,8 @@ class RTODE(forms.ModelForm):
         'RTO_NUM_PLT_NO':forms.TextInput(attrs={'class':'form-control'}),
         'RTO_ENG_NO':forms.TextInput(attrs={'class':'form-control'}),
         'RTO_CHESSISE_NO':forms.TextInput(attrs={'class':'form-control'}),
-        'RTO_KEY_NO':forms.TextInput(attrs={'class':'form-control'}),
-        'RTO_BATTERY_NO':forms.TextInput(attrs={'class':'form-control'}),
+        # 'RTO_KEY_NO':forms.TextInput(attrs={'class':'form-control'}),
+        # 'RTO_BATTERY_NO':forms.TextInput(attrs={'class':'form-control'}),
 
         }
 

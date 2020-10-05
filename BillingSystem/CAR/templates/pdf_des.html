@@ -43,7 +43,7 @@
     <div class=”container” id="veer4221">
         <div class=”row”>
         
-            <img src="{{im.IMG.path}}" width="100%">
+            <img src="{{im.IMG.path}}" width="100%" height="2%">
         </div>
         <div class="row">
 
@@ -120,21 +120,24 @@
 
             </tr>
             <tr>
-                <td></td>
-                <td></td>
+                
+                <td colspan="2"></td>
+                <th colspan="2"><br>INS Amount &nbsp &nbsp :</th>
+                <td id="td1">{{ins.INS_TOTAL_AMT}}/- &nbsp </td>
+                
+            </tr>
+            <tr>
+                <th>Booking AMT</th>
+                <td id="td1">{{car.CAR_BOOKING_AMT}}/-&nbsp </td>
                 <th colspan="2"><br>Totel</th>
                 
-                <td>zds</td>
+                <td id="td1">{{totel}}/- &nbsp</td>
             </tr>
         </table>
-       <hr> 
+        
         <h1><b>Insurance Details</b> </h1>
         <table>
-            <tr>
-                <td><b>INS Amount &nbsp &nbsp :</b>{{ins.INS_TOTAL_AMT}}</td>
-                <td></td>
-                <td></td>
-            </tr>
+            
             <tr>
                 <td><b>INS Company &nbsp :</b>{{ins.INS_COMPANY_NAME}}</td>
                 <td><b>INS Type   &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  :</b>{{ins.INS_TYPE}}</td>
@@ -143,15 +146,15 @@
             <tr>
                 <td><b>INS TO DATE   &nbsp :</b>{{ins.INS_TO_DATE}}</td>
                 <td><b>INS FROM DATE &nbsp &nbsp :</b>{{ins.INS_FROM_DATE}}</td>
-                <td></td>
+                <th><b>DreamCarPoint</b></th>
             </tr>
         </table>
-        <hr>
+        <!-- <hr> -->
         <table>
             <tr>
                 <td></td>
                 <td></td>
-                <th>DreamCarPoint<br><br><br>Authorised signatory</th>
+                <th><br><br>Authorised signatory</th>
                 
             </tr>
         </table>

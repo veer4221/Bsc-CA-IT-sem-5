@@ -25,7 +25,7 @@ class insuranceAdmin(admin.ModelAdmin):
 
 @admin.register(RTO)
 class RTOA(admin.ModelAdmin):
-    list_display =['RTO_ID','RTO_REG_CHARGE','RTO_NUM_PLT_CHARGE','RTO_NUM_PLT_NO','RTO_ENG_NO','RTO_CHESSISE_NO','RTO_KEY_NO','RTO_BATTERY_NO','CUS_ID','date_modified']
+    list_display =['RTO_ID','RTO_REG_CHARGE','RTO_NUM_PLT_CHARGE','RTO_NUM_PLT_NO','RTO_ENG_NO','RTO_CHESSISE_NO','CUS_ID','date_modified']
 
 
 
