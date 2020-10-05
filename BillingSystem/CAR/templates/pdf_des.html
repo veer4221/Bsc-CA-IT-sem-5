@@ -22,13 +22,24 @@
 			background: url("{% static 'static/static/image/bg.jpeg' %}");
             background-repeat:no-repeat;
             background-size:100%;
-		}
-        table{
+        }
+        tr,td{
+            padding: auto;
+        }
+        table,p{
             font-size: larger;
         }
+        #td1{
+            text-align:right ;
+        }
+    
+        
+    
+        
         </style>
     </head>
 <body>
+    <div class="border">
     <div class=”container” id="veer4221">
         <div class=”row”>
         
@@ -36,39 +47,115 @@
         </div>
         <div class="row">
 
-            <
-        <table>
-            <tr>
-                <td><h2>Customer name  :</h2> </td>
-                <td>{{customer.CUS_SARNAME}}{{customer.CUS_NAME}}}{{customer.CUS_FNAME}}</td>
-                <td><h2>CAR MODEL      :</h2></td>
-                <td>{{car.CAR_MODEL}}</td>
+         <hr>   
+        <table style="">
+            
+            <tr style="margin: 2%;">
+                <td>Bill No:  &nbsp  &nbsp  {{customer.CUS_ID}}</td>
             </tr>
             <tr>
-                <td><h2>Customer city  : </h2></td>
-                <td>{{customer.CUS_CITY}}</td>
-                <td><h2>CAR colour     :</h2></td>
-                <td>{{car.CAR_COLOUR}}</td>
+                <td>Bill Date: &nbsp {{bill_date}}</td>
             </tr>
-            <tr>
-                <td><h2>Customer Mo   :</h2> </td>
-                <td>{{customer.CUS_MO}}</td>
-                <td><h2>CAR Company   :</h2></td>
-                <td>{{car.CAR_COMPANY}}</td>
-            </tr>
-            <tr>
-                <td><h2>Customer Email:</h2> </td>
-                <td>{{customer.CUS_EMAIL}}</td>
-                <td><h2>CAR price     :</h2></td>
-                <td>{{car.CAR_PRICE_OR}}</td>
-                <tr>
-                    <td><h2>Customer state: </h2></td>
-                    <td>{{customer.CUS_STATE}}</td>
-                    <td><h2>CAR bookinamt:</h2></td>
-                    <td>{{car.CAR_BOOKING_AMT}}</td>
-                </tr>
             </tr>
         </table>
-     
-      
+        <hr>
+        <h1> Customer NAME & Address</h1>
+        <table>
+            <tr>
+                <td><B>NAME &nbsp &nbsp &nbsp :</B> &nbsp {{customer.CUS_SARNAME}} &nbsp {{customer.CUS_NAME}} &nbsp {{customer.CUS_FNAME}}</td>
+                <td><b>EMAIL &nbsp :</b> &nbsp {{customer.CUS_EMAIL}}</td>
+                <td><b></b></td>
+            </tr>
+            <tr>
+                <td><b>AT &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp :</b> &nbsp {{customer.CUS_CITY}}</td>
+                <td><b>STATE &nbsp :</b> &nbsp {{customer.CUS_STATE}}</td>
+                <td><b></b></td>
+            </tr>
+            <tr>
+                <td><b>TALUKA  &nbsp :</b> &nbsp {{customer.CUS_TALUKA}}</td>
+                <td><b>DIST  &nbsp &nbsp &nbsp :</b> &nbsp {{customer.CUS_DIST}}</td>
+                <td><b></b></td>
+            </tr>
+            <tr>
+                <td><b>MO &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp :</b> &nbsp {{customer.CUS_MO}}</td>
+                <td><b>PIN.Co &nbsp :</b> {{customer.CUS_Zip}} </td>
+                <td><b></b></td>
+                
+            </tr>
+        </table>
+        <table style="border: 1px solid black;">
+            <tr>
+                <th colspan="2"><br>Description</th>
+                <th><br>QTY </th>
+                <th><br>List OF Rate</th>
+                <th><br>Amount</th>
+            </tr>
+            <tr>
+                <td colspan="2"><br> . &nbsp MODEL :<b> {{car.CAR_MODEL}}</b> <br> . &nbsp COLOUR : <b>{{car.CAR_COLOUR}}</b> <br> . &nbsp ENG No : <b>{{RTO.RTO_ENG_NO}}</b> <br> . &nbsp CHESSISE NO : <b>{{RTO.RTO_CHESSISE_NO}}</b> <br> . &nbsp  NO PLATE NO :<b>{{RTO.RTO_NUM_PLT_NO}}</b></td>
+                <th>1</th>
+                <th>  CAR Price :</th>
+                <td id="td1"> {{car.CAR_PRICE_EX}}/- &nbsp </td>
+            </tr>
+            <tr>
+                <td colspan="2"></td>
+                <th colspan="2" id="td1"><br>RTO Charge :</th>
+                <td id="td1"><br>{{RTO.RTO_REG_CHARGE}}/- &nbsp </td>
+            </tr>
+            <tr>
+                <td colspan="2"></td>
+                <th colspan="2"><br>Transport Charg :</th>
+                <td id="td1"><br>{{other.OTH_TRANS_CHARGE}}/- &nbsp </td>
+            </tr>
+            <tr>
+                <td colspan="2"></td>
+                <th colspan="2"><br>No.PLT.charg</th>
+                <td id="td1"><br>{{RTO.RTO_NUM_PLT_CHARGE}}/- &nbsp </td>
+            
+            </tr>
+            <tr>
+                <td colspan="2"></td>
+                
+                <th colspan="2"><br>OTHER Expance:{{other.OTH_EXPENSE_NAME}}</th>
+                <td id="td1"><br>{{other.OTH_EXPENSE_PRICE}}/- &nbsp </td>
+
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <th colspan="2"><br>Totel</th>
+                
+                <td>zds</td>
+            </tr>
+        </table>
+       <hr> 
+        <h1><b>Insurance Details</b> </h1>
+        <table>
+            <tr>
+                <td><b>INS Amount &nbsp &nbsp :</b>{{ins.INS_TOTAL_AMT}}</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><b>INS Company &nbsp :</b>{{ins.INS_COMPANY_NAME}}</td>
+                <td><b>INS Type   &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  :</b>{{ins.INS_TYPE}}</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><b>INS TO DATE   &nbsp :</b>{{ins.INS_TO_DATE}}</td>
+                <td><b>INS FROM DATE &nbsp &nbsp :</b>{{ins.INS_FROM_DATE}}</td>
+                <td></td>
+            </tr>
+        </table>
+        <hr>
+        <table>
+            <tr>
+                <td></td>
+                <td></td>
+                <th>DreamCarPoint<br><br><br>Authorised signatory</th>
+                
+            </tr>
+        </table>
+        <hr id="hr1">
+        <h1 style="color:dodgerblue"> N.H. NO-8  &nbsp &nbsp sahkari road, &nbsp   near sales India, &nbsp Tulsi complex, &nbsp 1nd flore, TA - himatnagar(S.K) ,383100</h1>
+        
 </body>

@@ -9,17 +9,21 @@ class DateInput(forms.DateInput):
 class customerDe(forms.ModelForm):
     class Meta:
         model = customer
-        fields =['CUS_ID','CUS_SARNAME','CUS_NAME','CUS_FNAME','CUS_CITY','CUS_MO','CUS_EMAIL','CUS_STATE','CUS_Zip']
+        fields =['CUS_ID','CUS_SARNAME','CUS_NAME','CUS_FNAME','CUS_CITY','CUS_TALUKA','CUS_DIST','CUS_MO','CUS_EMAIL','CUS_STATE','CUS_Zip']
         widgets={
             'CUS_ID' : forms.TextInput(attrs={'class':'sr-only'}),
             'CUS_SARNAME': forms.TextInput(attrs={'class':'form-control'}),
             'CUS_NAME': forms.TextInput(attrs={'class':'form-control'}),
             'CUS_FNAME' : forms.TextInput(attrs={'class':'form-control'}),
             'CUS_CITY': forms.TextInput(attrs={'class':'form-control'}),
+            'CUS_TALUKA':forms.TextInput(attrs={'class':'form-control'}),
+            'CUS_DIST' :forms.TextInput(attrs={'class':'form-control'}),
             'CUS_MO':forms.TextInput(attrs={'class':'form-control'}),
             'CUS_EMAIL': forms.EmailInput(attrs={'class':'form-control'}),
             'CUS_STATE': forms.TextInput(attrs={'class':'form-control'}),
             'CUS_Zip': forms.TextInput(attrs={'class':'form-control'}),
+            
+
         }
 
   
@@ -36,7 +40,7 @@ class carDe(forms.ModelForm):
             'CAR_PRICE_OR': forms.NumberInput(attrs={'class':'form-control'}),
             'CAR_PRICE_EX':forms.NumberInput(attrs={'class':'form-control'}),
             'CAR_BOOKING_AMT': forms.NumberInput(attrs={'class':'form-control'}),
-            'CAR_BOOKING_DATE': forms.DateInput(attrs={'class':'form-control'}),
+            'CAR_BOOKING_DATE':DateInput(attrs={'class':'form-control'}),
             
         }
 
@@ -49,8 +53,8 @@ class insuranceDe(forms.ModelForm):
         'INS_COMPANY_NAME': forms.TextInput(attrs={'class':'form-control'}),
         'INS_TYPE': forms.TextInput(attrs={'class':'form-control'}),
         'INS_TOTAL_AMT':forms.NumberInput(attrs={'class':'form-control'}),
-        'INS_TO_DATE': forms.DateInput(attrs={'class':'form-control'}),
-        'INS_FROM_DATE': forms.DateInput(attrs={'class':'form-control'}),
+        'INS_TO_DATE': DateInput(attrs={'class':'form-control'}),
+        'INS_FROM_DATE': DateInput(attrs={'class':'form-control'}),
         }
 
 class RTODE(forms.ModelForm):
@@ -78,7 +82,7 @@ class OTHERDE(forms.ModelForm):
         'CUS_ID' :forms.NumberInput(attrs={'class':'form-control'}),
         'OTH_ID' :forms.NumberInput(attrs={'class':'form-control'}),
         'OTH_TRANS_CHARGE' :forms.NumberInput(attrs={'class':'form-control'}),
-        'OTH_DELIVERY_DATE': forms.DateInput(attrs={'class':'form-control'}),
+        'OTH_DELIVERY_DATE': DateInput(attrs={'class':'form-control'}),
         'OTH_EXPENSE_NAME' : forms.TextInput(attrs={'class':'form-control'}),
         'OTH_EXPENSE_PRICE' :forms.NumberInput(attrs={'class':'form-control'}),
         }

@@ -13,6 +13,8 @@ class customer(models.Model):
     CUS_NAME   = models.CharField(max_length=70,blank=True)
     CUS_FNAME   = models.CharField(max_length=70,blank=True)
     CUS_CITY   = models.CharField(max_length=70,blank=True)
+    CUS_TALUKA = models.CharField(max_length=69,default='Null')
+    CUS_DIST   = models.CharField(max_length=30,default="NULL")
     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,10}$', message="Enter 10 digits ")
     CUS_MO     = models.CharField(validators=[phone_regex],max_length=15,unique=True,blank=True)
     CUS_EMAIL  = models.EmailField(unique=True)
@@ -34,6 +36,7 @@ class car(models.Model):
     CAR_PRICE_EX = models.IntegerField(null=True)   
     CAR_BOOKING_AMT = models.IntegerField(null=True)
     CAR_BOOKING_DATE = models.DateField(null=True)
+    date_modified = models.DateTimeField(auto_now=True)
       
     
     def __str__(self):
@@ -47,6 +50,7 @@ class insurance(models.Model):
     INS_TOTAL_AMT    = models.IntegerField(null=True)
     INS_TO_DATE      = models.DateField(null=True)
     INS_FROM_DATE   = models.DateField(null=True)
+    date_modified = models.DateTimeField(auto_now=True)
     
     def __str__(self):
         return self.INS_COMPANY_NAME
@@ -64,6 +68,7 @@ class RTO(models.Model):
     RTO_CHESSISE_NO  = models.CharField(validators=[CHESSISE_regex],max_length= 17,unique=True,null=True)
     RTO_KEY_NO       = models.CharField(validators=[CHESSISE_regex],max_length= 17,unique=True,null=True)
     RTO_BATTERY_NO     = models.CharField(max_length= 20,unique=True,null=True)
+    date_modified = models.DateTimeField(auto_now=True)
    
 class OTHER(models.Model):
     CUS_ID     = models.ForeignKey(customer,on_delete=models.CASCADE)
