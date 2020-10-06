@@ -28,6 +28,7 @@ urlpatterns = [
     path('dashbord/',views.dashbord,name="dashbord"),
     # path('listing/Car/',views.car,name="car"),
     path('login/',views.login,name="login"),
+    path('logout/',views.logout,name="logout"),
     path('listing/Costomer/',views.formToDB.as_view(),name="Costomer"),
 #    path('listing/Car/',views.formCar,name="Car"),
     # path('listing/RTO/',views.temp,name="RTO"),

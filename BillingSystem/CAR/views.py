@@ -1,4 +1,4 @@
-from django.shortcuts import render,HttpResponseRedirect,HttpResponse
+from django.shortcuts import render,HttpResponseRedirect,HttpResponse,redirect
 from django.views.generic.list import ListView
 from django.views.generic.base import TemplateView
 from .models import customer,car,insurance,RTO,OTHER,IMG
@@ -14,9 +14,14 @@ from django.contrib.staticfiles import finders
 import os
 from django.template.loader import get_template
 from xhtml2pdf import pisa
+from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
+from django.contrib.auth import authenticate,login,logout
+from django.contrib import messages
 # from django.http import HttpResponse
 from django.conf import settings
 from datetime import date 
+from django.contrib.auth import login as auth_login
+from django.contrib.auth import logout as auth_logout
 # Create your views here.
 #def home(request):
  #   return render(request,'index.html')
@@ -34,7 +39,31 @@ def dashbord(request):
     return render(request,'base_dashbord.html')
 
 def login(request):
-    return render(request,'login.html')
+
+    if request.method == 'POST':
+        print('post')
+        fm= AuthenticationForm(request=request,data=request.POST)
+        if fm.is_valid():
+            uname = fm.cleaned_data['username']
+            print(uname)
+            upass = fm.cleaned_data['password']
+            print(upass)
+
+            user = authenticate(username=uname,password=upass)
+            if user is not None:
+                print('valid1')
+                auth_login(request,user)
+                print('valid2')
+                return HttpResponseRedirect('/listing/')
+    else:
+        fm= AuthenticationForm()
+
+        print('get re')
+    return render(request,'login.html',{'form':fm})
+
+def logout(request):
+    auth_logout(request)
+    return HttpResponseRedirect('/login/')
 
 # def car(request):
 #     return render(request,'index_car.html')
@@ -260,7 +289,7 @@ def render_pdf_view(request, *args, **kwargs):
     add = cp+RTOC+tpc+npc+oex+insA
     print(add)
     print(RTOC)
-    
+    namw =customer.objects.only('CUS_NAME').get(CUS_ID=id).CUS_NAME
     print(im)
     print("hello")
     bill_date = date.today()
@@ -269,7 +298,7 @@ def render_pdf_view(request, *args, **kwargs):
     context = {'customer': cus,'car':c,'im':im,'bill_date':bill_date,'ins':IN,'RTO':RT,'other':OT,'totel':add}
     # Create a Django response object, and specify content_type as pdf
     response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'filename="report.pdf"'
+    response['Content-Disposition'] = 'filename=invoice' + namw +str(datetime.datetime.now())+'.pdf'
     # find the template and render it.
     template = get_template(template_path)
     html = template.render(context)

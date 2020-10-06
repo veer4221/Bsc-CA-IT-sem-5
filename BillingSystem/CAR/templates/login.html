@@ -35,15 +35,24 @@
 			
 			<img src="{% static 'car/image/user.png' %} " class="user">
 			<h2>Log In Here</h2>
-			<form>
-				<p>Email</p>
+			<form action="" method="POST">
+				{% csrf_token %}
+				{{form}}
+				<input type="submit" value="Login">
+			</form>
+			<!-- <form mathod="post">
+		
+				{% csrf_token %}
+				{{form}} 
+			 <input type="submit" value="login" >
+				<!-- <p>UserName</p>
 				<input type="text" name = "" placeholder="Enter Email">
 				<p>Password</p>
 				<input type="password" name = "" placeholder="Enter Password">
-				<input type="submit" name = "" value="sign In">
+				<input type="submit" name = "" value="login">
 				<a href="#"> Forget Password</a> 
-				
-			</form>
+				 -->
+			</form> -->
 		</div>
 	</div>
 	<script src="{% static 'car/js/bootstrap.js' %}"></script>

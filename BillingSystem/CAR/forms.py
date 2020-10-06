@@ -1,6 +1,8 @@
 from django.core import validators
 from django import forms
 from .models import car,customer,insurance,RTO,OTHER
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
 #from bootstrap_modal_forms.forms import BSModalModelForm
 
 class DateInput(forms.DateInput):
@@ -11,7 +13,7 @@ class customerDe(forms.ModelForm):
         model = customer
         fields =['CUS_ID','CUS_SARNAME','CUS_NAME','CUS_FNAME','CUS_CITY','CUS_TALUKA','CUS_DIST','CUS_MO','CUS_EMAIL','CUS_STATE','CUS_Zip']
         widgets={
-            'CUS_ID' : forms.TextInput(attrs={'class':'sr-only'}),
+            'CUS_ID' : forms.TextInput(attrs={'class':'form-inline'}),
             'CUS_SARNAME': forms.TextInput(attrs={'class':'form-control'}),
             'CUS_NAME': forms.TextInput(attrs={'class':'form-control'}),
             'CUS_FNAME' : forms.TextInput(attrs={'class':'form-control'}),
