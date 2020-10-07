@@ -6,6 +6,7 @@ from .forms import customerDe,carDe,insuranceDe,RTODE,OTHERDE
 from easy_pdf.views import PDFTemplateView,PDFTemplateResponseMixin
 from django.contrib.auth.models import User
 import datetime
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.template.loader import render_to_string
 from weasyprint import HTML
 import tempfile
@@ -36,6 +37,8 @@ from django.contrib.auth import logout as auth_logout
 #    return render(request,'base_listing.html')
 
 def dashbord(request):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect('/login/')
     return render(request,'base_dashbord.html')
 
 def login(request):
@@ -89,18 +92,20 @@ a = 2
 # def other(request):
     # return render(request,'index_other.html')
 
-class customerView(ListView):
+class customerView(LoginRequiredMixin,ListView):
     model = customer
+    login_url = '/login/'
     template_name ='base_listing.html'
 
-class formToDB(TemplateView):
+class formToDB(LoginRequiredMixin,TemplateView):
     template_name = 'index_customer.html'
+    login_url = '/login/'
     def get_context_data(self, *arg, **kwargs):
         fm = customerDe()
         context = {'form':fm}
         return context
     
-    def post(self,request,id=0):
+    def post(self,request,id=0):     
         fm = customerDe(request.POST)
         if fm.is_valid():
             fm.save()
@@ -134,95 +139,100 @@ class formToDB(TemplateView):
 #     return render(request,'index_car.html',{'form':fm})
 
 def DeleteDate(request,id):
-    if request.method == 'POST' :
-        pi = customer.objects.get(pk=id)
-        pi.delete()
-        return HttpResponseRedirect('/listing')
-
+    if request.user.is_authenticated:
+        if request.method == 'POST' :
+            pi = customer.objects.get(pk=id)
+            pi.delete()
+            return HttpResponseRedirect('/listing')
+    else:
+        return HttpResponseRedirect('/login/')
 
 def UpdateData(request,id):
     print(id)
-    if request.method =='POST':
-        print(request)
-############### Custmer Update ############## 
-        cus = customer.objects.get(pk=id)
-        fm = customerDe(request.POST,instance=cus) 
-        if fm.is_valid():
-            fm.save()
-############## car Update ############## 
-        if car.objects.filter(CUS_ID=id).exists():
-            car1 = car.objects.get(CUS_ID=id)
-            fm2 = carDe(request.POST,instance=car1) 
-            if fm2.is_valid():
-                fm2.save()
-        else:
-            cfm = carDe(request.POST)
-            if cfm.is_valid():
-                cfm.save()
-############### INS Update ##############  
-        if insurance.objects.filter(CUS_ID=id).exists():
-            ins = insurance.objects.get(CUS_ID=id)
-            fm3 = insuranceDe(request.POST,instance=ins) 
-            if fm3.is_valid():
-                fm3.save()
-                print(fm3)
-        else:
-            cfm3 = insuranceDe(request.POST)
-            if cfm3.is_valid():
-                cfm3.save()
-############## RTO #######################
-        if RTO.objects.filter(CUS_ID=id).exists():
-            rt = RTO.objects.get(CUS_ID=id)
-            fm4 = RTODE(request.POST,instance=rt) 
-            if fm4.is_valid():
-                fm4.save()
-                print(fm4)
-        else:
-            fm4 = RTODE(request.POST)
-            if fm4.is_valid():
-                fm4.save()
+    if request.user.is_authenticated:
+        if request.method =='POST':
+            print(request)
+    ############### Custmer Update ############## 
+            cus = customer.objects.get(pk=id)
+            fm = customerDe(request.POST,instance=cus) 
+            if fm.is_valid():
+                fm.save()
+    ############## car Update ############## 
+            if car.objects.filter(CUS_ID=id).exists():
+                car1 = car.objects.get(CUS_ID=id)
+                fm2 = carDe(request.POST,instance=car1) 
+                if fm2.is_valid():
+                    fm2.save()
+            else:
+                cfm = carDe(request.POST)
+                if cfm.is_valid():
+                    cfm.save()
+    ############### INS Update ##############  
+            if insurance.objects.filter(CUS_ID=id).exists():
+                ins = insurance.objects.get(CUS_ID=id)
+                fm3 = insuranceDe(request.POST,instance=ins) 
+                if fm3.is_valid():
+                    fm3.save()
+                    print(fm3)
+            else:
+                cfm3 = insuranceDe(request.POST)
+                if cfm3.is_valid():
+                    cfm3.save()
+    ############## RTO #######################
+            if RTO.objects.filter(CUS_ID=id).exists():
+                rt = RTO.objects.get(CUS_ID=id)
+                fm4 = RTODE(request.POST,instance=rt) 
+                if fm4.is_valid():
+                    fm4.save()
+                    print(fm4)
+            else:
+                fm4 = RTODE(request.POST)
+                if fm4.is_valid():
+                    fm4.save()
 
-       
-############ OTHER  #####################
-        if OTHER.objects.filter(CUS_ID=id).exists():
-            ot = OTHER.objects.get(CUS_ID=id)
-            fm5 = OTHERDE(request.POST,instance=ot) 
-            if fm5.is_valid():
-                fm5.save()
-                print(fm5)
+        
+    ############ OTHER  #####################
+            if OTHER.objects.filter(CUS_ID=id).exists():
+                ot = OTHER.objects.get(CUS_ID=id)
+                fm5 = OTHERDE(request.POST,instance=ot) 
+                if fm5.is_valid():
+                    fm5.save()
+                    print(fm5)
+            else:
+                cfm3 = OTHERDE(request.POST)
+                if cfm3.is_valid():
+                    cfm3.save()
+            
+            
+            return HttpResponseRedirect('/%s/'%id)
+        #/classroom/notamember/%s/' % classname)
         else:
-            cfm3 = OTHERDE(request.POST)
-            if cfm3.is_valid():
-                cfm3.save()
-        
-        
-        return HttpResponseRedirect('/%s/'%id)
-    #/classroom/notamember/%s/' % classname)
+    ########### customerForm ###############
+            print("else")
+            cus = customer.objects.get(pk=id)
+            fm = customerDe(instance=cus)
+    #############car form #################
+            car1 = car.objects.filter(CUS_ID=id).first()
+            print('car1',car1)   
+            fm2 = carDe(instance=car1,initial={'CUS_ID':id})
+    ############## ins form ######################
+            ins = insurance.objects.filter(CUS_ID=id).first()
+            print('ins',ins)   
+            fm3 = insuranceDe(instance=ins,initial={'CUS_ID':id})
+    ############### RTO #####################
+            rt = RTO.objects.filter(CUS_ID=id).first()
+            print('ins',rt)   
+            fm4 = RTODE(instance=rt,initial={'CUS_ID':id})
+    ############## OTHER #####################
+            ot = OTHER.objects.filter(CUS_ID=id).first()
+            print('ins',ot)   
+            fm5 = OTHERDE(instance=ot,initial={'CUS_ID':id})
+            if car.objects.filter(CUS_ID=id).exists():
+                return render(request,'index_customerUpdate.html',{'form':fm,'form2':fm2,'form3':fm3,'form4':fm4,'form5':fm5,'id':id})
+            else:
+                return render(request,'index_customerUpdate.html',{'form':fm,'form2':fm2,'id':id})
     else:
-########### customerForm ###############
-        print("else")
-        cus = customer.objects.get(pk=id)
-        fm = customerDe(instance=cus)
-#############car form #################
-        car1 = car.objects.filter(CUS_ID=id).first()
-        print('car1',car1)   
-        fm2 = carDe(instance=car1,initial={'CUS_ID':id})
-############## ins form ######################
-        ins = insurance.objects.filter(CUS_ID=id).first()
-        print('ins',ins)   
-        fm3 = insuranceDe(instance=ins,initial={'CUS_ID':id})
-############### RTO #####################
-        rt = RTO.objects.filter(CUS_ID=id).first()
-        print('ins',rt)   
-        fm4 = RTODE(instance=rt,initial={'CUS_ID':id})
-############## OTHER #####################
-        ot = OTHER.objects.filter(CUS_ID=id).first()
-        print('ins',ot)   
-        fm5 = OTHERDE(instance=ot,initial={'CUS_ID':id})
-        if car.objects.filter(CUS_ID=id).exists():
-            return render(request,'index_customerUpdate.html',{'form':fm,'form2':fm2,'form3':fm3,'form4':fm4,'form5':fm5,'id':id})
-        else:
-            return render(request,'index_customerUpdate.html',{'form':fm,'form2':fm2,'id':id})
+        return HttpResponseRedirect('/login/')
     #     else:
     #         cr = car.objects.get(pk=id)
     #         cfm = carDe(instance=cr)
@@ -273,6 +283,8 @@ def UpdateData(request,id):
 #     return response   
 
 def render_pdf_view(request, *args, **kwargs):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect('/login/')
     id = kwargs.get('id')
     cus = customer.objects.get(CUS_ID=id) 
     c = car.objects.get(CUS_ID=id) 

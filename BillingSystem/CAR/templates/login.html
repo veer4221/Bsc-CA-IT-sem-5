@@ -37,7 +37,10 @@
 			<h2>Log In Here</h2>
 			<form action="" method="POST">
 				{% csrf_token %}
-				{{form}}
+				<p><label for="id_username">Username:</label></p>
+				{{form.username}}
+				<p><label for="id_password">Password:</label></p>
+				{{form.password}}
 				<input type="submit" value="Login">
 			</form>
 			<!-- <form mathod="post">
@@ -52,7 +55,7 @@
 				<input type="submit" name = "" value="login">
 				<a href="#"> Forget Password</a> 
 				 -->
-			</form> -->
+			 
 		</div>
 	</div>
 	<script src="{% static 'car/js/bootstrap.js' %}"></script>
