@@ -2,7 +2,7 @@ from django.shortcuts import render,HttpResponseRedirect,HttpResponse,redirect
 from django.views.generic.list import ListView
 from django.views.generic.base import TemplateView
 from .models import customer,car,insurance,RTO,OTHER,IMG
-from .forms import customerDe,carDe,insuranceDe,RTODE,OTHERDE
+from .forms import customerDe,carDe,insuranceDe,RTODE,OTHERDE,reportDE
 from easy_pdf.views import PDFTemplateView,PDFTemplateResponseMixin
 from django.contrib.auth.models import User
 import datetime
@@ -23,6 +23,8 @@ from django.conf import settings
 from datetime import date 
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
+from django.db.models import Count,Q
+from collections import Counter 
 # Create your views here.
 #def home(request):
  #   return render(request,'index.html')
@@ -30,8 +32,24 @@ from django.contrib.auth import logout as auth_logout
 #def base(request):
  #   return render(request,'base.html')
 
-# def report(request):
-#     return render(request,'base_report.html')
+def report(request):
+
+    fm = reportDE()
+    if request.method == 'POST':
+     
+    
+        to = request.POST.get('to_date')
+        frome = request.POST.get('from_date')
+        
+        cus_id1 = OTHER.objects.filter(Q(OTH_DELIVERY_DATE__gte=to) & Q(OTH_DELIVERY_DATE__lte=frome)).values('CUS_ID')
+        CUS_TBL = customer.objects.filter(CUS_ID__in=cus_id1)
+        INS_TBL = insurance.objects.filter(CUS_ID__in=cus_id1)
+        CAR_TBL = car.objects.filter(CUS_ID__in=cus_id1)
+        RTO_TBL = RTO.objects.filter(CUS_ID__in=cus_id1)
+        OTH_TBL = OTHER.objects.filter(CUS_ID__in=cus_id1)
+        
+        # print(cos)
+    return render(request,'report.html',{'form':fm,'cus':CUS_TBL,'car':CAR_TBL,'ins':INS_TBL,'rto':RTO_TBL,'other':OTH_TBL})
 
 # def listing(request):
 #    return render(request,'base_listing.html')
@@ -39,7 +57,26 @@ from django.contrib.auth import logout as auth_logout
 def dashbord(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect('/login/')
-    return render(request,'base_dashbord.html')
+
+    all_data_cus = customer.objects.all()
+    Count_cus = all_data_cus.aggregate(Count('CUS_ID'))
+    all_data_other = OTHER.objects.all()
+    Count_OTH = all_data_other.aggregate(Count('OTH_ID'))
+    # print(Count_OTH)
+    # temp1 = Counter(Count_cus) 
+    # temp2 = Counter(Count_OTH)
+    t1  = list(Count_cus.values())
+    t2  = list(Count_OTH.values())
+    t3  = int(t1[0]-t2[0])
+    
+
+    # print(active)
+    # {key: Count_cus[] - Count_OTH[]}  
+
+
+    context={'Con':Count_cus,'Other':Count_OTH,'active':t3}
+    return render(request,'main_dash.html',context)
+
 
 def login(request):
 
@@ -57,7 +94,7 @@ def login(request):
                 print('valid1')
                 auth_login(request,user)
                 print('valid2')
-                return HttpResponseRedirect('/listing/')
+                return HttpResponseRedirect('/dashbord/')
     else:
         fm= AuthenticationForm()
 

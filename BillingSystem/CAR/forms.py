@@ -34,8 +34,8 @@ class carDe(forms.ModelForm):
         model = car
         fields =['CUS_ID','CAR_ID','CAR_MODEL','CAR_COLOUR','CAR_COMPANY','CAR_PRICE_OR','CAR_PRICE_EX','CAR_BOOKING_AMT','CAR_BOOKING_DATE']
         widgets={
-            'CUS_ID':forms.NumberInput(attrs={'class':'form-control'}),
-            'CAR_ID' : forms.TextInput(attrs={'class':'sr-only'}),
+            'CUS_ID':forms.NumberInput(attrs={'readonly':'readonly','class':'form-control'}),
+            'CAR_ID' : forms.TextInput(attrs={'class':'form-control'}),
             'CAR_MODEL': forms.TextInput(attrs={'class':'form-control'}),
             'CAR_COLOUR': forms.TextInput(attrs={'class':'form-control'}),
             'CAR_COMPANY' : forms.TextInput(attrs={'class':'form-control'}),
@@ -51,7 +51,7 @@ class insuranceDe(forms.ModelForm):
         model = insurance
         fields =['CUS_ID','INS_COMPANY_NAME','INS_TYPE','INS_TOTAL_AMT','INS_TO_DATE','INS_FROM_DATE']
         widgets={
-        'CUS_ID':forms.NumberInput(attrs={'class':'form-control'}),
+        'CUS_ID':forms.NumberInput(attrs={'readonly':'readonly','class':'form-control'}),
         'INS_COMPANY_NAME': forms.TextInput(attrs={'class':'form-control'}),
         'INS_TYPE': forms.TextInput(attrs={'class':'form-control'}),
         'INS_TOTAL_AMT':forms.NumberInput(attrs={'class':'form-control'}),
@@ -64,7 +64,7 @@ class RTODE(forms.ModelForm):
         model = RTO
         fields =['CUS_ID','RTO_ID','RTO_REG_CHARGE','RTO_NUM_PLT_CHARGE','RTO_NUM_PLT_NO','RTO_ENG_NO','RTO_CHESSISE_NO']
         widgets={
-        'CUS_ID':forms.NumberInput(attrs={'class':'form-control'}),
+        'CUS_ID':forms.NumberInput(attrs={'readonly':'readonly','class':'form-control'}),
         'RTO_ID':forms.NumberInput(attrs={'class':'form-control'}),
         'RTO_REG_CHARGE':forms.NumberInput(attrs={'class':'form-control'}),
         'RTO_NUM_PLT_CHARGE':forms.NumberInput(attrs={'class':'form-control'}),
@@ -81,7 +81,7 @@ class OTHERDE(forms.ModelForm):
         model = OTHER
         fields =['CUS_ID','OTH_ID','OTH_TRANS_CHARGE', 'OTH_DELIVERY_DATE', 'OTH_EXPENSE_NAME', 'OTH_EXPENSE_PRICE']
         widgets={
-        'CUS_ID' :forms.NumberInput(attrs={'class':'form-control'}),
+        'CUS_ID' :forms.NumberInput(attrs={'readonly':'readonly','class':'form-control'}),
         'OTH_ID' :forms.NumberInput(attrs={'class':'form-control'}),
         'OTH_TRANS_CHARGE' :forms.NumberInput(attrs={'class':'form-control'}),
         'OTH_DELIVERY_DATE': DateInput(attrs={'class':'form-control'}),
@@ -97,3 +97,7 @@ class OTHERDE(forms.ModelForm):
 #         widgets={
 #             'OTH_EXPENSE_NAME' : forms.TextInput(attrs={'class':'form-control'})
 #             }
+
+class reportDE(forms.Form):
+    to_date = forms.DateField(widget=DateInput)
+    from_date = forms.DateField(widget=DateInput)
