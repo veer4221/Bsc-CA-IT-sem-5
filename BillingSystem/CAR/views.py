@@ -34,7 +34,7 @@ from collections import Counter
 
 def report(request):
 
-    fm = reportDE()
+   
     if request.method == 'POST':
      
     
@@ -47,9 +47,14 @@ def report(request):
         CAR_TBL = car.objects.filter(CUS_ID__in=cus_id1)
         RTO_TBL = RTO.objects.filter(CUS_ID__in=cus_id1)
         OTH_TBL = OTHER.objects.filter(CUS_ID__in=cus_id1)
-        
+        print(CUS_TBL)
+        mylist = zip(CUS_TBL,CAR_TBL,INS_TBL,RTO_TBL,OTH_TBL)
+        return render(request,'report.html',{'cus':CUS_TBL,'car':CAR_TBL,'ins':INS_TBL,'rto':RTO_TBL,'other':OTH_TBL,'mylist':mylist})
+    else:
+        fm = reportDE()
         # print(cos)
-    return render(request,'report.html',{'form':fm,'cus':CUS_TBL,'car':CAR_TBL,'ins':INS_TBL,'rto':RTO_TBL,'other':OTH_TBL})
+        return render(request,'report.html',{'form':fm})
+    
 
 # def listing(request):
 #    return render(request,'base_listing.html')

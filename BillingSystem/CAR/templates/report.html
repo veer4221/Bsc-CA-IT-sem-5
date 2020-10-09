@@ -88,59 +88,98 @@
                 </form>
                 {{cu}}
                 <div class="table-responsive">
-        <!-- <table id="bootstrapdatatable" class="table table-striped table-bordered" width="100%">
+        <table id="bootstrapdatatable" class="table table-striped table-bordered" width="100%">
                     <thead>
                         <th><input type="checkbox" id="checkall" /></th>
                         <th>ID</th>
-                        <th>SarName</th>
-                        <th>Name</th>
-                        <th>Fathername</th>
-                        <th>Contact</th>
-                        <th>City</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-                        <th>Bill</th>
+                        <th>CUS_SARNAME</th>
+                        <th>CUS_NAME</th>
+                        <th>CUS_FNAME</th>
+                        <th>CAR_MODEL</th>
+                        <th>CUS_CITY</th>
+                        <th>CUS_TALUKA</th>
+                        <th>CUS_DIST</th>
+                        <th>CUS_MO</th>
+                        <th>CUS_EMAIL</th>
+                        <th>CUS_STATE</th>
+                        <th>CUS_Zip</th>
+                        <th>CAR_ID</th>
+                        <!-- <th>CAR_MODEL</th> -->
+                        <th>CAR_COLOUR</th>
+                        <th>CAR_COMPANY</th>
+                        <th>CAR_PRICE_OR</th>
+                        <th>CAR_PRICE_EX</th>
+                        <th>CAR_BOOKING_AMT</th>
+                        <th>CAR_BOOKING_DATE</th>
+                        <th>INS_ID</th>
+                        <th>INS_COMPANY_NAME</th>
+                        <th>INS_TYPE</th>
+                        <th>INS_TOTAL_AMT</th>
+                        <th>INS_TO_DATE</th>
+                        <th>INS_FROM_DATE</th>
+                        <th>RTO_ID</th>
+                        <th>RTO_REG_CHARGE</th>
+                        <th>RTO_NUM_PLT_CHARGE</th>
+                        <th>RTO_NUM_PLT_NO</th>
+                        <th>RTO_ENG_NO</th>
+                        <th>RTO_CHESSISE_NO</th>
+                        <th>OTH_ID</th>
+                        <th>OTH_TRANS_CHARGE</th>
+                        <th>OTH_DELIVERY_DATE</th>
+                        <th>OTH_EXPENSE_NAME</th>
+                         <th>OTH_EXPENSE_PRICE</th>
+                        
+                        
+                        <!-- <th>Delete</th>
+                        <th>Bill</th> -->
                     </thead>
         <tbody>
-        {% for customer in customer_list %}  
+        {% for customer,car,ins,RTO,other in mylist %}  
             <tr>  
             <td><input type="checkbox" class="checkthis" /></td>
             <td>{{ customer.CUS_ID }}</td>  
             <td>{{ customer.CUS_SARNAME }}</td>  
             <td>{{ customer.CUS_NAME }}</td>
             <td>{{ customer.CUS_FNAME }}</td>  
-            <td>{{ customer.CUS_MO }}</td> 
-            <td>{{ customer.CUS_CITY }}</td>  
-             <td>
+            <td>{{ car.CAR_MODEL}}</td>
+            <td>{{ customer.CUS_CITY }}</td> 
+            <td>{{ customer.CUS_TALUKA }}</td>  
+            <td>{{ customer.CUS_DIST }}</td>
+            <td>{{ customer.CUS_MO }}</td>
+            <td>{{ customer.CUS_EMAIL}}</td>
+            <td>{{ customer.CUS_STATE}}</td>
+            <td>{{ customer.CUS_Zip}}</td>
+            <td>{{ car.CAR_ID}}</td>            
+            <td>{{ car.CAR_COLOUR}}</td>
+            <td>{{ car.CAR_COMPANY}}</td>
+            <td>{{ car.CAR_PRICE_OR}}</td>
+            <td>{{ car.CAR_PRICE_EX}}</td>
+            <td>{{ car.CAR_BOOKING_AMT}}</td>
+            <td>{{ car.CAR_BOOKING_DATE}}</td>
+            <td>{{ ins.INS_ID}}</td>
+            <td>{{ ins.INS_COMPANY_NAME}}</td>
+            <td>{{ ins.INS_TYPE}}</td>
+            <td>{{ ins.INS_TOTAL_AMT}}</td>
+            <td>{{ ins.INS_TO_DATE}}</td>
+            <td>{{ ins.INS_FROM_DATE}}</td>
+            <td>{{ RTO.RTO_ID}}</td>
+            <td>{{ RTO.RTO_REG_CHARGE}}</td>
+            <td>{{ RTO.RTO_NUM_PLT_CHARGE}}</td>
+            <td>{{ RTO.RTO_NUM_PLT_NO}}</td>
+            <td>{{ RTO.RTO_ENG_NO}}</td>
+            <td>{{ RTO.RTO_CHESSISE_NO}}</td>
+            <td>{{ other.OTH_ID}}</td>
+            <td>{{ other.OTH_TRANS_CHARGE}}</td>
+            <td>{{ other.OTH_DELIVERY_DATE}}</td>
+            <td>{{ other.OTH_EXPENSE_NAME}}</td>
+            <td>{{ other.OTH_EXPENSE_PRICE}}</td>                   
                  
-                     <a href="{% url 'Update' customer.CUS_ID %}" class="btn btn-primary btn-xs" >
-                        <i class='fas fa-edit'></i>
-                    </a>
-                
-            </td>
-            <td class="deletebtn">
-                
-                    <form action="{% url 'Delete' customer.CUS_ID %}" method="POST",class="d-inline">
-                        {% csrf_token %}
-                        <button type="submit"  class="btn btn-danger">
-                            <i class="fa fa-trash"></i>
-                        </button>
-                    </form>
-                    
-                
-            </td>
-            <td>
-                 
-                <a href="{% url 'pdf' customer.CUS_ID %}" class="btn btn-success btn-xs" >
-                   <i class='fas fa-file'></i>
-               </a>
-           
-             </td> 
              </tr>  
+
         {% endfor %} 
         </tbody>
                 
-        </table> -->
+        </table>
                 </div>
             </div>
 
